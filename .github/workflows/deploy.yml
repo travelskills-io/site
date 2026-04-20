@@ -23,6 +23,7 @@ jobs:
             --exclude='.git/' \
             --exclude='.github/' \
             --exclude='.claude/' \
+            --exclude='README.md' \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }}" \
             ./ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_TARGET }}
