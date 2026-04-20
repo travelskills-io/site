@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Fond sombre -->
+  <rect width="32" height="32" rx="6" fill="#0a0a0f"/>
+  <!-- Bordure dorée -->
+  <rect x="1" y="1" width="30" height="30" rx="5.5" fill="none" stroke="#c8a96e" stroke-width="1.2"/>
+  <!-- Lettre t -->
+  <text
+    x="6"
+    y="22"
+    font-family="DM Mono, monospace"
+    font-size="14"
+    font-weight="400"
+    fill="#c8a96e"
+    letter-spacing="-0.5"
+  >ts</text>
+</svg>

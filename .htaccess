@@ -1,0 +1,32 @@
+# TravelSkills.io — Hostinger configuration
+
+# ── MIME Types ──────────────────────────────────────────────────────────────
+AddType application/xml .xml
+AddType image/svg+xml .svg
+AddType application/manifest+json .webmanifest
+
+# ── Redirections www → sans www ──────────────────────────────────────────────
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.travelskills\.io [NC]
+RewriteRule ^(.*)$ https://travelskills.io/$1 [R=301,L]
+
+# ── HTTPS forcé ──────────────────────────────────────────────────────────────
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# ── Bloquer l'accès direct à subscribe.php depuis le navigateur ──────────────
+<Files "subscribe.php">
+  <RequireAll>
+    Require all granted
+  </RequireAll>
+</Files>
+
+# ── Cache statique ───────────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

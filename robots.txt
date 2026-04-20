@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /subscribe.php
+
+Sitemap: https://travelskills.io/sitemap.xml
