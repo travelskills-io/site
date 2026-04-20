@@ -52,4 +52,4 @@ Every push to `main` triggers a GitHub Actions workflow (`.github/workflows/depl
 
 ## License
 
-MIT
+AGPL v3
