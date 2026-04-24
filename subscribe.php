@@ -72,24 +72,18 @@ function brevo_post(string $endpoint, array $data): array {
 }
 
 function send_template(int $templateId, string $toEmail, string $toName = '', array $params = []): void {
+    $to = ['email' => $toEmail];
+    if (!empty($toName)) {
+        $to['name'] = $toName;
+    }
     $payload = [
         'templateId' => $templateId,
-        'to'         => [['email' => $toEmail, 'name' => $toName]],
+        'to'         => [$to],
     ];
     if (!empty($params)) {
         $payload['params'] = $params;
     }
-    $res = brevo_post('/smtp/email', $payload);
-
-    // TEMP DEBUG: log Brevo response to diagnose welcome email issue
-    @file_put_contents(
-        __DIR__ . '/brevo.log',
-        '[' . date('Y-m-d H:i:s') . "] template=$templateId to=$toEmail "
-        . 'http=' . $res['code'] . ' '
-        . 'body=' . json_encode($res['body']) . ' '
-        . 'err=' . $res['error'] . "\n",
-        FILE_APPEND
-    );
+    brevo_post('/smtp/email', $payload);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
