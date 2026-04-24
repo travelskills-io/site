@@ -79,7 +79,17 @@ function send_template(int $templateId, string $toEmail, string $toName = '', ar
     if (!empty($params)) {
         $payload['params'] = $params;
     }
-    brevo_post('/smtp/email', $payload);
+    $res = brevo_post('/smtp/email', $payload);
+
+    // TEMP DEBUG: log Brevo response to diagnose welcome email issue
+    @file_put_contents(
+        __DIR__ . '/brevo.log',
+        '[' . date('Y-m-d H:i:s') . "] template=$templateId to=$toEmail "
+        . 'http=' . $res['code'] . ' '
+        . 'body=' . json_encode($res['body']) . ' '
+        . 'err=' . $res['error'] . "\n",
+        FILE_APPEND
+    );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
