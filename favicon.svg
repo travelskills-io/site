@@ -1,16 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <!-- Fond sombre -->
-  <rect width="32" height="32" rx="6" fill="#0a0a0f"/>
-  <!-- Bordure dorée -->
-  <rect x="1" y="1" width="30" height="30" rx="5.5" fill="none" stroke="#c8a96e" stroke-width="1.2"/>
-  <!-- Lettre t -->
-  <text
-    x="6"
-    y="22"
-    font-family="DM Mono, monospace"
-    font-size="14"
-    font-weight="400"
-    fill="#c8a96e"
-    letter-spacing="-0.5"
-  >ts</text>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="clip-TS_-_TravelSkills.io_-_ISO_Main">
+      <rect width="512" height="512"/>
+    </clipPath>
+  </defs>
+  <g id="TS_-_TravelSkills.io_-_ISO_Main" data-name="TS - TravelSkills.io - ISO_Main" clip-path="url(#clip-TS_-_TravelSkills.io_-_ISO_Main)">
+    <rect width="512" height="512" fill="#191b24"/>
+    <g id="Groupe_8" data-name="Groupe 8" transform="translate(95.815 138.627)">
+      <path id="Soustraction_2" data-name="Soustraction 2" d="M134.523,236.413h-65.6V52.278H0V0H217.071L198.907,52.278H134.523v91.448l-21,1.077c0,.068-.439,7.489,1.943,19.766a145.309,145.309,0,0,0,6.149,21.935,175.59,175.59,0,0,0,12.907,27.506v22.4Z" transform="translate(0 0)" fill="#f0ede7" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Tracé_7" data-name="Tracé 7" d="M112,76.693q-46.837,0-72.644-21.825T11-4.235L73.13-7.1Q75.679,9.465,85.078,18.546t27.56,9.081q14.338,0,22.144-4.939t7.806-14.816A19.034,19.034,0,0,0,139.561-2.8q-3.027-4.62-11.789-8.284t-25.967-7.169Q70.9-24.627,51.783-33.07T23.9-54.9q-8.762-13.382-8.762-34.092,0-21.029,10.833-36.959T57.2-150.8q20.391-8.921,49.067-8.921,30.269,0,50.66,10.2t31.7,28.038q11.311,17.843,13.541,41.42l-61.493,2.549q-1.274-15.612-10.355-24.374t-24.693-8.762q-13.382,0-20.71,5.416A16.979,16.979,0,0,0,77.591-90.9q0,10.514,8.443,16.09t30.428,9.4q33.455,5.735,52.89,15.612t27.56,23.578q8.125,13.7,8.125,31.543,0,33.136-24.533,52.253T112,76.693Z" transform="translate(114.152 159.72)" fill="#f0ede7"/>
+    </g>
+  </g>
 </svg>
