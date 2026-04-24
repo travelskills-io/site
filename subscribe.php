@@ -8,10 +8,10 @@
 define('BREVO_API_KEY',        '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');
 define('BREVO_LIST_ID',        5);
 define('TEMPLATE_NOTIFICATION', 5);   // Notification to team
-define('TEMPLATE_WELCOME_EN',   6);   // Welcome email — English
-define('TEMPLATE_WELCOME_FR',   7);   // Welcome email — French
 define('NOTIFY_EMAIL',         'hello@travelskills.io');
 define('NOTIFY_NAME',          'TravelSkills.io');
+// Note: Welcome emails are now handled via a Brevo marketing automation
+// triggered on list subscription — no longer sent from this endpoint.
 // ─────────────────────────────────────────────────────────────────────────────
 
 // CORS — autoriser uniquement travelskills.io
@@ -112,12 +112,10 @@ if (!in_array($http_code, [201, 204]) && !$already_sub) {
     exit;
 }
 
-// 2. Envoyer le mail de bienvenu à l'inscrit (seulement si nouveau)
+// 2. Envoyer la notification à l'équipe (seulement si nouveau contact)
+//    Le mail de bienvenue est géré par une automation marketing Brevo
+//    déclenchée sur l'ajout à la liste.
 if ($http_code === 201) {
-    $welcome_template = ($lang === 'fr') ? TEMPLATE_WELCOME_FR : TEMPLATE_WELCOME_EN;
-    send_template($welcome_template, $email);
-
-    // 3. Envoyer la notification à l'équipe (avec params pour afficher les infos du nouveau contact)
     send_template(TEMPLATE_NOTIFICATION, NOTIFY_EMAIL, NOTIFY_NAME, [
         'EMAIL'  => $email,
         'LANG'   => strtoupper($lang),
