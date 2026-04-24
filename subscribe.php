@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Lire et valider le body JSON
 $body  = json_decode(file_get_contents('php://input'), true);
-$email = trim($body['email'] ?? '');
+$email = strtolower(trim($body['email'] ?? ''));
 $lang  = in_array($body['lang'] ?? '', ['en', 'fr']) ? $body['lang'] : 'en';
 
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -71,11 +71,15 @@ function brevo_post(string $endpoint, array $data): array {
     return ['code' => $http_code, 'body' => json_decode($response, true), 'error' => $curl_error];
 }
 
-function send_template(int $templateId, string $toEmail, string $toName = ''): void {
-    brevo_post('/smtp/email', [
+function send_template(int $templateId, string $toEmail, string $toName = '', array $params = []): void {
+    $payload = [
         'templateId' => $templateId,
         'to'         => [['email' => $toEmail, 'name' => $toName]],
-    ]);
+    ];
+    if (!empty($params)) {
+        $payload['params'] = $params;
+    }
+    brevo_post('/smtp/email', $payload);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -109,8 +113,13 @@ if ($http_code === 201) {
     $welcome_template = ($lang === 'fr') ? TEMPLATE_WELCOME_FR : TEMPLATE_WELCOME_EN;
     send_template($welcome_template, $email);
 
-    // 3. Envoyer la notification à l'équipe
-    send_template(TEMPLATE_NOTIFICATION, NOTIFY_EMAIL, NOTIFY_NAME);
+    // 3. Envoyer la notification à l'équipe (avec params pour afficher les infos du nouveau contact)
+    send_template(TEMPLATE_NOTIFICATION, NOTIFY_EMAIL, NOTIFY_NAME, [
+        'EMAIL'  => $email,
+        'LANG'   => strtoupper($lang),
+        'DATE'   => date('Y-m-d H:i'),
+        'SOURCE' => 'travelskills.io',
+    ]);
 }
 
 echo json_encode(['success' => true, 'message' => $already_sub ? 'Already subscribed' : 'Subscribed successfully']);
