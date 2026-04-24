@@ -5,14 +5,18 @@
  */
 
 // ─── Configuration ───────────────────────────────────────────────────────────
-define('BREVO_API_KEY', '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');  // xkeysib-...
-define('BREVO_LIST_ID', 5);                               // Remplacer par l'ID de votre liste (ex: 4)
+define('BREVO_API_KEY',        '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');
+define('BREVO_LIST_ID',        5);
+define('TEMPLATE_NOTIFICATION', 5);   // Notification to team
+define('TEMPLATE_WELCOME_EN',   6);   // Welcome email — English
+define('TEMPLATE_WELCOME_FR',   7);   // Welcome email — French
+define('NOTIFY_EMAIL',         'hello@travelskills.io');
+define('NOTIFY_NAME',          'TravelSkills.io');
 // ─────────────────────────────────────────────────────────────────────────────
 
 // CORS — autoriser uniquement travelskills.io
 $allowed_origins = ['https://travelskills.io', 'https://www.travelskills.io'];
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-
 if (in_array($origin, $allowed_origins)) {
     header("Access-Control-Allow-Origin: $origin");
 }
@@ -35,8 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Lire et valider le body JSON
-$body = json_decode(file_get_contents('php://input'), true);
+$body  = json_decode(file_get_contents('php://input'), true);
 $email = trim($body['email'] ?? '');
+$lang  = in_array($body['lang'] ?? '', ['en', 'fr']) ? $body['lang'] : 'en';
 
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
@@ -44,54 +49,68 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-// Appel API Brevo
-$payload = json_encode([
-    'email'          => $email,
-    'listIds'        => [BREVO_LIST_ID],
-    'updateEnabled'  => false,   // Ne pas écraser si déjà existant
-    'attributes'     => [
-        'SOURCE' => 'travelskills.io'
-    ]
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function brevo_post(string $endpoint, array $data): array {
+    $ch = curl_init('https://api.brevo.com/v3' . $endpoint);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => json_encode($data),
+        CURLOPT_HTTPHEADER     => [
+            'accept: application/json',
+            'content-type: application/json',
+            'api-key: ' . BREVO_API_KEY,
+        ],
+        CURLOPT_TIMEOUT => 10,
+    ]);
+    $response   = curl_exec($ch);
+    $http_code  = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curl_error = curl_error($ch);
+    curl_close($ch);
+    return ['code' => $http_code, 'body' => json_decode($response, true), 'error' => $curl_error];
+}
+
+function send_template(int $templateId, string $toEmail, string $toName = ''): void {
+    brevo_post('/smtp/email', [
+        'templateId' => $templateId,
+        'to'         => [['email' => $toEmail, 'name' => $toName]],
+    ]);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+// 1. Ajouter le contact à la liste Brevo
+$result = brevo_post('/contacts', [
+    'email'         => $email,
+    'listIds'       => [BREVO_LIST_ID],
+    'updateEnabled' => false,
+    'attributes'    => ['SOURCE' => 'travelskills.io', 'LANG' => strtoupper($lang)],
 ]);
 
-$ch = curl_init('https://api.brevo.com/v3/contacts');
-curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_POST           => true,
-    CURLOPT_POSTFIELDS     => $payload,
-    CURLOPT_HTTPHEADER     => [
-        'accept: application/json',
-        'content-type: application/json',
-        'api-key: ' . BREVO_API_KEY,
-    ],
-    CURLOPT_TIMEOUT        => 10,
-]);
-
-$response     = curl_exec($ch);
-$http_code    = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-$curl_error   = curl_error($ch);
-curl_close($ch);
-
-if ($curl_error) {
+if ($result['error']) {
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Connection error']);
     exit;
 }
 
-$result = json_decode($response, true);
+$http_code   = $result['code'];
+$brevo_body  = $result['body'];
+$already_sub = ($http_code === 400 && ($brevo_body['code'] ?? '') === 'duplicate_parameter');
 
-// 201 = créé, 204 = déjà existant (updateEnabled: false)
-if ($http_code === 201 || $http_code === 204) {
-    echo json_encode(['success' => true, 'message' => 'Subscribed successfully']);
-} elseif ($http_code === 400 && isset($result['code']) && $result['code'] === 'duplicate_parameter') {
-    // Email déjà inscrit — on répond success pour ne pas exposer la base
-    echo json_encode(['success' => true, 'message' => 'Already subscribed']);
-} else {
+if (!in_array($http_code, [201, 204]) && !$already_sub) {
     http_response_code(500);
-    echo json_encode([
-        'success' => false,
-        'message' => 'Subscription failed',
-        'http_code' => $http_code,
-        'brevo_response' => $result
-    ]);
+    echo json_encode(['success' => false, 'message' => 'Subscription failed', 'http_code' => $http_code]);
+    exit;
 }
+
+// 2. Envoyer le mail de bienvenu à l'inscrit (seulement si nouveau)
+if ($http_code === 201) {
+    $welcome_template = ($lang === 'fr') ? TEMPLATE_WELCOME_FR : TEMPLATE_WELCOME_EN;
+    send_template($welcome_template, $email);
+
+    // 3. Envoyer la notification à l'équipe
+    send_template(TEMPLATE_NOTIFICATION, NOTIFY_EMAIL, NOTIFY_NAME);
+}
+
+echo json_encode(['success' => true, 'message' => $already_sub ? 'Already subscribed' : 'Subscribed successfully']);
