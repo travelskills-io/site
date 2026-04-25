@@ -340,7 +340,12 @@ footer {
   color: var(--ink-dim);
   text-decoration: none;
   transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
+
+.footer-link svg { width: 13px; height: 13px; fill: currentColor; }
 
 .footer-link:hover { color: var(--ink); }
 
