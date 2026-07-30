@@ -1,6 +1,6 @@
-import Script from 'next/script';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import PlausibleTracker from './PlausibleTracker';
 import '../app/globals.css';
 
 // Shared <html>/<body> shell. Each locale root layout renders it with its lang
@@ -16,12 +16,8 @@ export default function RootHtml({
     <html lang={lang} className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
         {children}
-        {/* Privacy-friendly analytics (no cookies), carried over from v3. */}
-        <Script
-          defer
-          src="https://plausible.io/js/pa-66_ww6vMzEsKmN5qjc9_E.js"
-          strategy="afterInteractive"
-        />
+        {/* Privacy-friendly analytics (no cookies) via the official tracker. */}
+        <PlausibleTracker />
       </body>
     </html>
   );

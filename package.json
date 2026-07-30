@@ -11,6 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@plausible-analytics/tracker": "^0.4.5",
     "geist": "^1.3.1",
     "next": "14.2.15",
     "react": "^18.3.1",
