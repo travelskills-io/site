@@ -8,8 +8,8 @@
 define('BREVO_API_KEY',        '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');
 define('BREVO_LIST_ID',        5);
 define('TEMPLATE_NOTIFICATION', 5);   // Notification to team
-define('NOTIFY_EMAIL',         'hello@travelskills.io');
-define('NOTIFY_NAME',          'TravelSkills.io');
+define('NOTIFY_EMAIL',         'nicolas@nfrancois.fr');
+define('NOTIFY_NAME',          'Nicolas François');
 // Note: Welcome emails are now handled via a Brevo marketing automation
 // triggered on list subscription — no longer sent from this endpoint.
 // ─────────────────────────────────────────────────────────────────────────────
