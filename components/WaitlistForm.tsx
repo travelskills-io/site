@@ -1,24 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import type { Locale, LocaleContent } from '@/lib/content';
 
 type Status = 'idle' | 'submitting' | 'success' | 'already' | 'error';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Renders the social-proof line with a functional status icon and the leading
-// count emphasized. Icon inherits currentColor (Heroicons solid, DS-compliant).
+// Renders the social-proof line with the leading count emphasized.
 function renderSocialProof(line: string) {
   const [count, ...rest] = line.split(' ');
   return (
-    <span className="inline-flex items-center gap-sm">
-      <PaperAirplaneIcon aria-hidden="true" className="h-[16px] w-[16px] shrink-0" />
-      <span>
-        <span className="font-semibold">{count}</span> {rest.join(' ')}
-      </span>
-    </span>
+    <>
+      <span className="font-semibold">{count}</span> {rest.join(' ')}
+    </>
   );
 }
 
