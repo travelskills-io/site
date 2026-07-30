@@ -1,0 +1,129 @@
+/* Design tokens (CSS custom properties). For any non-Tailwind consumer. */
+@import '../design/design-tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* Dark only. No theme toggle (DESIGN.md meta.colorMode: dark). */
+    background-color: var(--color-surface);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Gold, outline-only focus ring at 2px offset, on every interactive control.
+     Do/Don't rule #3. Never a background change, never a white halo. */
+  :where(a, button, input, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+    border-radius: var(--rounded-sm);
+  }
+
+  ::selection {
+    background-color: var(--color-secondary);
+    color: var(--color-on-secondary);
+  }
+}
+
+@layer components {
+  /* Page container: 1200px desktop / 720px tablet, side padding per tier. */
+  .container-page {
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+    padding-inline: var(--spacing-lg); /* 16px mobile */
+  }
+  @media (min-width: 600px) {
+    .container-page {
+      padding-inline: var(--spacing-2xl); /* 32px tablet */
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-page {
+      max-width: 1200px;
+      padding-inline: var(--spacing-4xl); /* 64px desktop */
+    }
+  }
+
+  /* Hero H1: the single `display` occurrence, with the sanctioned responsive
+     overrides from DESIGN.md (2.5rem mobile / 3.25rem tablet / 4rem desktop). */
+  .type-display {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-on-surface-display);
+    font-size: 2.5rem;
+    line-height: 2.75rem;
+  }
+  @media (min-width: 600px) {
+    .type-display {
+      font-size: 3.25rem;
+      line-height: 3.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .type-display {
+      font-size: 4rem;
+      line-height: 4.25rem;
+    }
+  }
+
+  /* Prose for legal / privacy pages. Consumes tokens only. */
+  .legal-prose h2 {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    margin-top: var(--spacing-3xl);
+    margin-bottom: var(--spacing-lg);
+  }
+  .legal-prose p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--color-on-surface);
+    margin-bottom: var(--spacing-lg);
+  }
+  .legal-prose p strong {
+    color: var(--color-on-surface-display);
+    font-weight: 600;
+  }
+  .legal-prose ul {
+    list-style: none;
+    margin: var(--spacing-md) 0 var(--spacing-xl);
+    padding: 0;
+  }
+  .legal-prose li {
+    position: relative;
+    padding-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--color-on-surface);
+  }
+  .legal-prose li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+  }
+  .legal-prose a {
+    color: var(--color-on-surface-display);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color var(--motion-hover);
+  }
+  .legal-prose a:hover {
+    color: var(--color-secondary);
+  }
+}

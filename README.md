@@ -1,55 +1,63 @@
 # TravelSkills.io
 
-Static landing page for [travelskills.io](https://travelskills.io) — the first open-source library of Claude Agent Skills for travel and tourism professionals.
+Landing page for [travelskills.io](https://travelskills.io) — the first open-source
+library of Claude Agent Skills for travel and tourism professionals.
 
 ## Stack
 
-- Plain HTML/CSS — no framework, no build step
-- PHP (`subscribe.php`) — newsletter signup via Brevo API
-- Hosted on Hostinger
-- Deployed via GitHub Actions on every push to `main`
+- **Next.js 14** (App Router, TypeScript) — EN at `/`, FR at `/fr/`
+- **Tailwind CSS**, wired to the design system in [`design/`](design/) (single source of truth)
+- **Geist / Geist Mono** self-hosted via `next/font` (`geist` package)
+- Waitlist form → **Brevo** via the `/api/subscribe` route handler
+- Deployed on **Vercel** (Git integration; every push to `main` ships)
+
+## Design system
+
+`design/` is the source of truth for everything visual. No design value is decided in
+page code — it is consumed from the tokens (`tailwind.theme.json` for Tailwind,
+`design-tokens.css` for raw CSS). If a value is missing, add it to `DESIGN.md` first,
+then propagate. See `design/DESIGN.md` for the full contract (dark-only, gold used
+functionally only, tonal elevation, geometric spacing scale).
+
+## Local development
+
+```bash
+cp .env.example .env.local   # add your BREVO_API_KEY
+npm install
+npm run dev                  # http://localhost:3000  ·  /fr for French
+```
+
+## Environment variables
+
+Set these in Vercel (Project → Settings → Environment Variables) and in `.env.local`
+for local dev. `.env.local` is gitignored — the Brevo key must never be committed.
+
+| Variable | Purpose | Default |
+|---|---|---|
+| `BREVO_API_KEY` | Brevo API key (required) | — |
+| `BREVO_LIST_ID` | Waitlist list id | `5` |
+| `BREVO_NOTIFICATION_TEMPLATE_ID` | Team notification template | `5` |
+| `BREVO_NOTIFY_EMAIL` | Where lead alerts are sent | `nicolas@nfrancois.fr` |
+| `BREVO_NOTIFY_NAME` | Recipient name for alerts | `Nicolas François` |
 
 ## Structure
 
 ```
-public_html/
-├── index.html                          # EN landing page
-├── fr/
-│   ├── index.html                      # FR landing page
-│   └── politique-de-confidentialite/
-│       └── index.html                  # FR privacy policy
-├── privacy/
-│   └── index.html                      # EN privacy policy
-├── style.css                           # Shared stylesheet (EN + FR)
-├── subscribe.php                       # Brevo API handler
-├── .htaccess
-├── robots.txt
-├── sitemap.xml
-└── site.webmanifest
+app/
+├── (en)/                 # English root layout (<html lang="en">) — served at /
+│   ├── page.tsx          #   landing
+│   ├── privacy/          #   /privacy/
+│   └── legal/            #   /legal/
+├── (fr)/                 # French root layout (<html lang="fr">)
+│   └── fr/               #   served at /fr/ , /fr/politique-de-confidentialite/ , /fr/mentions-legales/
+├── api/subscribe/        # Brevo handler (port of the old subscribe.php)
+├── robots.ts             # generated /robots.txt
+└── sitemap.ts            # generated /sitemap.xml
+components/               # Landing, WaitlistForm, LegalLayout, RootHtml
+lib/content.ts            # all EN + FR copy (real DOM text, SEO-critical)
+design/                   # design system — source of truth
 ```
-
-## Dev local
-
-```bash
-npx serve . --listen 8788
-```
-
-Then open [http://localhost:8788](http://localhost:8788) (EN) and [http://localhost:8788/fr/](http://localhost:8788/fr/) (FR).
-
-## Deployment
-
-Every push to `main` triggers a GitHub Actions workflow (`.github/workflows/deploy.yml`) that syncs files to Hostinger via rsync over SSH.
-
-**Required GitHub secrets:**
-
-| Secret | Description |
-|---|---|
-| `SSH_PRIVATE_KEY` | Private key for Hostinger SSH access |
-| `SSH_HOST` | Hostinger SSH hostname |
-| `SSH_USER` | Hostinger SSH username |
-| `SSH_PORT` | Hostinger SSH port |
-| `SSH_TARGET` | Remote path on Hostinger (e.g. `/home/.../public_html/`) |
 
 ## License
 
-AGPL v3
+MIT

@@ -1,0 +1,100 @@
+/* TravelSkills.io · Design Tokens
+   Generated from DESIGN.md (alpha).
+   Consume these CSS custom properties anywhere in the platform.
+   Typography in rem so user font-size preferences scale (WCAG 1.4.4).
+   ============================================================ */
+
+:root {
+  /* ---- Colors ---- */
+  --color-primary: #FFFFFF;
+  --color-on-primary: #0A0A0E;
+  --color-secondary: #D0B982;
+  --color-on-secondary: #0A0A0E;
+  --color-neutral: #27272A;
+  --color-on-neutral: #FAFAFA;
+  --color-surface: #0A0A0E;
+  --color-on-surface: #FFFFFF;
+  --color-on-surface-display: #F0EDE7;
+  --color-on-surface-muted: #9CA3AF;
+  --color-surface-container: #191B24;
+  --color-surface-container-high: #22242E;
+  --color-outline: #2A2D38;
+  --color-inverse-surface: #F0EDE7;
+  --color-on-inverse-surface: #0A0A0E;
+  --color-success: #10B981;
+  --color-on-success: #0A0A0E;
+  --color-info: #8B5CF6;
+  --color-on-info: #0A0A0E;
+  --color-error: #EF4444;
+  --color-on-error: #0A0A0E;
+
+  /* ---- Typography (rem-based for WCAG 1.4.4 Resize Text) ---- */
+  --typography-display-fontFamily: Geist, system-ui, sans-serif;
+  --typography-display-fontSize: 4rem;
+  --typography-display-fontWeight: 600;
+  --typography-display-lineHeight: 4.25rem;
+  --typography-display-letterSpacing: -0.02em;
+
+  --typography-headline-lg-fontFamily: Geist, system-ui, sans-serif;
+  --typography-headline-lg-fontSize: 2.5rem;
+  --typography-headline-lg-fontWeight: 600;
+  --typography-headline-lg-lineHeight: 2.75rem;
+  --typography-headline-lg-letterSpacing: -0.015em;
+
+  --typography-headline-md-fontFamily: Geist, system-ui, sans-serif;
+  --typography-headline-md-fontSize: 1.5rem;
+  --typography-headline-md-fontWeight: 600;
+  --typography-headline-md-lineHeight: 1.875rem;
+  --typography-headline-md-letterSpacing: -0.01em;
+
+  --typography-title-lg-fontFamily: Geist, system-ui, sans-serif;
+  --typography-title-lg-fontSize: 1.25rem;
+  --typography-title-lg-fontWeight: 600;
+  --typography-title-lg-lineHeight: 1.625rem;
+  --typography-title-lg-letterSpacing: -0.005em;
+
+  --typography-body-lg-fontFamily: Geist, system-ui, sans-serif;
+  --typography-body-lg-fontSize: 1rem;
+  --typography-body-lg-fontWeight: 400;
+  --typography-body-lg-lineHeight: 1.5rem;
+
+  --typography-body-md-fontFamily: Geist, system-ui, sans-serif;
+  --typography-body-md-fontSize: 0.875rem;
+  --typography-body-md-fontWeight: 400;
+  --typography-body-md-lineHeight: 1.3125rem;
+
+  --typography-label-sm-fontFamily: Geist, system-ui, sans-serif;
+  --typography-label-sm-fontSize: 0.75rem;
+  --typography-label-sm-fontWeight: 500;
+  --typography-label-sm-lineHeight: 1rem;
+  --typography-label-sm-letterSpacing: 0.02em;
+
+  --typography-mono-md-fontFamily: Geist Mono, ui-monospace, monospace;
+  --typography-mono-md-fontSize: 0.8125rem;
+  --typography-mono-md-fontWeight: 400;
+  --typography-mono-md-lineHeight: 1.25rem;
+
+  /* ---- Rounded (px, geometric primitives) ---- */
+  --rounded-sm: 4px;
+  --rounded-md: 8px;
+  --rounded-lg: 12px;
+  --rounded-xl: 16px;
+  --rounded-2xl: 24px;
+  --rounded-full: 9999px;
+
+  /* ---- Spacing (px, geometric scale 4-8-12-16-24-32-48-64-96-128) ---- */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+  --spacing-5xl: 96px;
+  --spacing-6xl: 128px;
+
+  /* ---- Motion ---- */
+  --motion-hover: 150ms ease-out;
+  --motion-overlay: 250ms ease-in-out;
+}

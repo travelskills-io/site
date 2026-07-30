@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="fr" class="theme-dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TravelSkills.io · Design System Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* ============================================================================
+   TravelSkills.io · Showcase
+   Sections: Vision · Foundations · Tokens · Components · Rules · Footer
+   No Patterns section. Rules limited to 10. All values consumed from DS tokens.
+   ============================================================================ */
+
+:root {
+  /* Colors */
+  --color-primary: #FFFFFF;
+  --color-on-primary: #0A0A0E;
+  --color-secondary: #D0B982;
+  --color-on-secondary: #0A0A0E;
+  --color-neutral: #27272A;
+  --color-on-neutral: #FAFAFA;
+  --color-surface: #0A0A0E;
+  --color-on-surface: #FFFFFF;
+  --color-on-surface-display: #F0EDE7;
+  --color-on-surface-muted: #9CA3AF;
+  --color-surface-container: #191B24;
+  --color-surface-container-high: #22242E;
+  --color-outline: #2A2D38;
+  --color-inverse-surface: #F0EDE7;
+  --color-on-inverse-surface: #0A0A0E;
+  --color-success: #10B981;
+  --color-on-success: #0A0A0E;
+  --color-info: #8B5CF6;
+  --color-on-info: #0A0A0E;
+  --color-error: #EF4444;
+  --color-on-error: #0A0A0E;
+
+  /* Typography (rem-based for WCAG 1.4.4 Resize Text) */
+  --typography-display-fontFamily: Geist, system-ui, sans-serif;
+  --typography-display-fontSize: 4rem;
+  --typography-display-fontWeight: 600;
+  --typography-display-lineHeight: 4.25rem;
+  --typography-display-letterSpacing: -0.02em;
+  --typography-headline-lg-fontFamily: Geist, system-ui, sans-serif;
+  --typography-headline-lg-fontSize: 2.5rem;
+  --typography-headline-lg-fontWeight: 600;
+  --typography-headline-lg-lineHeight: 2.75rem;
+  --typography-headline-lg-letterSpacing: -0.015em;
+  --typography-headline-md-fontFamily: Geist, system-ui, sans-serif;
+  --typography-headline-md-fontSize: 1.5rem;
+  --typography-headline-md-fontWeight: 600;
+  --typography-headline-md-lineHeight: 1.875rem;
+  --typography-headline-md-letterSpacing: -0.01em;
+  --typography-title-lg-fontFamily: Geist, system-ui, sans-serif;
+  --typography-title-lg-fontSize: 1.25rem;
+  --typography-title-lg-fontWeight: 600;
+  --typography-title-lg-lineHeight: 1.625rem;
+  --typography-title-lg-letterSpacing: -0.005em;
+  --typography-body-lg-fontFamily: Geist, system-ui, sans-serif;
+  --typography-body-lg-fontSize: 1rem;
+  --typography-body-lg-fontWeight: 400;
+  --typography-body-lg-lineHeight: 1.5rem;
+  --typography-body-md-fontFamily: Geist, system-ui, sans-serif;
+  --typography-body-md-fontSize: 0.875rem;
+  --typography-body-md-fontWeight: 400;
+  --typography-body-md-lineHeight: 1.3125rem;
+  --typography-label-sm-fontFamily: Geist, system-ui, sans-serif;
+  --typography-label-sm-fontSize: 0.75rem;
+  --typography-label-sm-fontWeight: 500;
+  --typography-label-sm-lineHeight: 1rem;
+  --typography-label-sm-letterSpacing: 0.02em;
+  --typography-mono-md-fontFamily: "Geist Mono", ui-monospace, monospace;
+  --typography-mono-md-fontSize: 0.8125rem;
+  --typography-mono-md-fontWeight: 400;
+  --typography-mono-md-lineHeight: 1.25rem;
+
+  /* Rounded */
+  --rounded-sm: 4px;
+  --rounded-md: 8px;
+  --rounded-lg: 12px;
+  --rounded-xl: 16px;
+  --rounded-2xl: 24px;
+  --rounded-full: 9999px;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+  --spacing-5xl: 96px;
+  --spacing-6xl: 128px;
+
+  /* Motion */
+  --motion-hover: 150ms ease-out;
+  --motion-overlay: 250ms ease-in-out;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-pad-x: clamp(24px, 5vw, 64px);
+
+  /* Chrome divider, mode-aware */
+  --color-chrome-divider: color-mix(in srgb, var(--color-on-surface) 6%, transparent);
+}
+
+/* ===== Reset & base ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+:target { scroll-margin-top: 96px; }
+html {
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body {
+  font-family: var(--typography-body-md-fontFamily);
+  font-size: var(--typography-body-md-fontSize);
+  line-height: 1.55;
+  color: var(--color-on-surface);
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--color-secondary); color: var(--color-on-secondary); }
+
+/* Universal focus */
+:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: var(--rounded-sm);
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad-x);
+}
+
+/* ===== Topbar ===== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(10, 10, 14, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-chrome-divider);
+}
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 14px;
+  gap: var(--spacing-md);
+}
+.topbar-brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  color: var(--color-on-surface-display);
+  font-family: var(--typography-title-lg-fontFamily);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.topbar-version {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.topbar-actions { display: flex; gap: var(--spacing-sm); align-items: center; }
+
+/* Mobile menu toggle (hamburger) */
+.topbar-menu-toggle {
+  display: none;
+  position: relative;
+  width: 40px; height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-on-surface-display);
+  cursor: pointer;
+  transition: color var(--motion-hover);
+}
+.topbar-menu-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: var(--rounded-md);
+  background: transparent;
+  transition: background-color var(--motion-hover);
+  pointer-events: none;
+}
+.topbar-menu-toggle:hover::before { background: var(--color-surface-container); }
+.topbar-menu-toggle svg { display: block; width: 18px; height: 18px; position: relative; z-index: 1; }
+.topbar-menu-toggle .icon-close { display: none; }
+.topbar-menu-toggle[aria-expanded="true"] .icon-burger { display: none; }
+.topbar-menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+/* Mobile menu panel */
+.topbar-menu {
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: rgba(10, 10, 14, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-chrome-divider);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity var(--motion-overlay), transform var(--motion-overlay);
+}
+.topbar-menu[data-open] {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+.topbar-menu-inner {
+  padding-block: var(--spacing-sm) var(--spacing-xl);
+}
+.topbar-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.topbar-menu-link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) 0;
+  border-bottom: 1px solid var(--color-chrome-divider);
+  color: var(--color-on-surface);
+  font-family: var(--typography-title-lg-fontFamily);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  transition: color var(--motion-hover);
+}
+.topbar-menu-link:hover { color: var(--color-secondary); }
+.topbar-menu-num {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-secondary);
+  min-width: 24px;
+}
+@media (max-width: 720px) {
+  .topbar-actions { display: none; }
+  .topbar-menu-toggle { display: inline-flex; }
+}
+@media (max-width: 480px) {
+  .topbar-version { display: none; }
+}
+@media (min-width: 721px) {
+  .topbar-menu { display: none; }
+}
+
+/* ===== Side TOC ===== */
+.toc {
+  display: none;
+  position: fixed;
+  top: 112px;
+  left: max(16px, calc((100vw - var(--container-max)) / 2 - 180px));
+  z-index: 5;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  min-width: 130px;
+}
+.toc-label {
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  color: var(--color-on-surface-muted);
+  margin-bottom: var(--spacing-md);
+}
+.toc a {
+  color: var(--color-on-surface-muted);
+  padding: 4px 0;
+  transition: color var(--motion-hover);
+}
+.toc a:hover { color: var(--color-on-surface-display); }
+@media (min-width: 1320px) { .toc { display: flex; } }
+
+/* ===== Vision (hero) ===== */
+.vision {
+  position: relative;
+  padding: var(--spacing-6xl) 0 var(--spacing-5xl);
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-chrome-divider);
+}
+.vision::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(208, 185, 130, 0.18) 1px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-position: -12px -12px;
+  mask-image: radial-gradient(ellipse 70% 60% at 80% 20%, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 80% 20%, black 0%, transparent 70%);
+  pointer-events: none;
+}
+.vision-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-secondary);
+  margin-bottom: var(--spacing-2xl);
+}
+.vision-eyebrow .num { color: var(--color-secondary); }
+.vision-eyebrow .sep { color: var(--color-on-surface-muted); }
+.vision-eyebrow .label { color: var(--color-on-surface-muted); letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.6875rem; }
+.vision-title {
+  font-family: var(--typography-display-fontFamily);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: var(--typography-display-fontWeight);
+  line-height: 1.04;
+  letter-spacing: var(--typography-display-letterSpacing);
+  color: var(--color-on-surface-display);
+  margin: 0 0 var(--spacing-xl);
+  max-width: 18ch;
+}
+.vision-lede {
+  font-family: var(--typography-body-lg-fontFamily);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-on-surface-muted);
+  max-width: 56ch;
+  margin: 0 0 var(--spacing-3xl);
+}
+.vision-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-2xl);
+  padding-top: var(--spacing-2xl);
+  border-top: 1px solid var(--color-chrome-divider);
+  max-width: 880px;
+}
+.vision-meta dt {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-xs);
+}
+.vision-meta dd {
+  margin: 0;
+  font-family: var(--typography-title-lg-fontFamily);
+  font-size: var(--typography-title-lg-fontSize);
+  font-weight: var(--typography-title-lg-fontWeight);
+  letter-spacing: var(--typography-title-lg-letterSpacing);
+  color: var(--color-on-surface-display);
+}
+
+/* ===== Section frame ===== */
+.section {
+  padding: var(--spacing-6xl) 0;
+  border-bottom: 1px solid var(--color-chrome-divider);
+}
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-4xl);
+  max-width: 760px;
+}
+@media (min-width: 900px) {
+  .section-head { grid-template-columns: 240px minmax(0, 1fr); gap: var(--spacing-3xl); max-width: none; }
+}
+.section-eyebrow {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-secondary);
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+}
+.section-eyebrow .num { color: var(--color-secondary); }
+.section-eyebrow .label {
+  color: var(--color-on-surface-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+}
+.section-title {
+  font-family: var(--typography-headline-lg-fontFamily);
+  font-size: var(--typography-headline-lg-fontSize);
+  font-weight: var(--typography-headline-lg-fontWeight);
+  line-height: var(--typography-headline-lg-lineHeight);
+  letter-spacing: var(--typography-headline-lg-letterSpacing);
+  color: var(--color-on-surface-display);
+  margin: 0 0 var(--spacing-md);
+}
+.section-lede {
+  font-family: var(--typography-body-lg-fontFamily);
+  font-size: var(--typography-body-lg-fontSize);
+  line-height: var(--typography-body-lg-lineHeight);
+  color: var(--color-on-surface-muted);
+  max-width: 64ch;
+  margin: 0;
+}
+.subsection-title {
+  font-family: var(--typography-headline-md-fontFamily);
+  font-size: var(--typography-headline-md-fontSize);
+  font-weight: var(--typography-headline-md-fontWeight);
+  line-height: var(--typography-headline-md-lineHeight);
+  letter-spacing: var(--typography-headline-md-letterSpacing);
+  color: var(--color-on-surface-display);
+  margin: 0 0 var(--spacing-xl);
+}
+.subsection { margin-top: var(--spacing-5xl); }
+.subsection:first-of-type { margin-top: 0; }
+
+/* ===== Foundations ===== */
+.foundations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-2xl);
+}
+.foundation {
+  background: var(--color-surface-container);
+  border-radius: var(--rounded-2xl);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+.foundation-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+.foundation-num {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-secondary);
+}
+.foundation-symbol {
+  width: 32px; height: 32px;
+  border-radius: var(--rounded-full);
+  background: var(--color-surface-container-high);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--color-secondary);
+}
+.foundation-title {
+  font-family: var(--typography-title-lg-fontFamily);
+  font-size: var(--typography-title-lg-fontSize);
+  font-weight: var(--typography-title-lg-fontWeight);
+  letter-spacing: var(--typography-title-lg-letterSpacing);
+  color: var(--color-on-surface-display);
+  margin: 0;
+}
+.foundation-body {
+  color: var(--color-on-surface-muted);
+  font-size: var(--typography-body-md-fontSize);
+  line-height: var(--typography-body-md-lineHeight);
+  margin: 0;
+}
+
+/* ===== Color gallery ===== */
+.color-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--spacing-lg);
+}
+.swatch {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--rounded-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-chrome-divider);
+  background: var(--color-surface-container);
+}
+.swatch-fill {
+  aspect-ratio: 16 / 10;
+  display: flex; align-items: flex-end; justify-content: flex-start;
+  padding: var(--spacing-md);
+}
+.swatch-fill .pair-on {
+  font-family: var(--typography-label-sm-fontFamily);
+  font-size: var(--typography-label-sm-fontSize);
+  font-weight: var(--typography-label-sm-fontWeight);
+  letter-spacing: var(--typography-label-sm-letterSpacing);
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.swatch-meta {
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.swatch-name {
+  font-family: var(--typography-label-sm-fontFamily);
+  font-size: var(--typography-label-sm-fontSize);
+  letter-spacing: var(--typography-label-sm-letterSpacing);
+  font-weight: var(--typography-label-sm-fontWeight);
+  color: var(--color-on-surface-display);
+  text-transform: uppercase;
+}
+.swatch-token {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+}
+.swatch-hex {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+}
+
+/* ===== Typography table ===== */
+.type-table {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-lg);
+}
+@media (min-width: 800px) {
+  .type-row { grid-template-columns: 200px 120px minmax(0, 1fr); }
+}
+.type-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) 0;
+  border-bottom: 1px solid var(--color-chrome-divider);
+  align-items: baseline;
+}
+.type-row:last-child { border-bottom: 0; }
+.type-meta-name {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-secondary);
+}
+.type-meta-spec {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+}
+.type-sample { color: var(--color-on-surface-display); }
+.type-sample.is-body, .type-sample.is-label, .type-sample.is-mono { color: var(--color-on-surface); }
+
+/* ===== Spacing scale ===== */
+.spacing-scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+.spacing-row {
+  display: grid;
+  grid-template-columns: 80px 80px 1fr;
+  gap: var(--spacing-lg);
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-chrome-divider);
+}
+.spacing-row:last-child { border-bottom: 0; }
+.spacing-token {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-secondary);
+}
+.spacing-value {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+}
+.spacing-bar {
+  height: 8px;
+  border-radius: var(--rounded-full);
+  background: var(--color-secondary);
+  opacity: 0.85;
+}
+
+/* ===== Rounded scale ===== */
+.rounded-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--spacing-lg);
+}
+.rounded-cell {
+  background: var(--color-surface-container);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: center;
+  border: 1px solid var(--color-chrome-divider);
+  border-radius: var(--rounded-md);
+}
+.rounded-shape {
+  width: 80px; height: 80px;
+  background: var(--color-surface-container-high);
+  border: 1px solid var(--color-outline);
+}
+.rounded-meta { text-align: center; display: flex; flex-direction: column; gap: 2px; }
+.rounded-name {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-secondary);
+}
+.rounded-value {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+}
+
+/* ===== Motion ===== */
+.motion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-lg);
+}
+.motion-card {
+  background: var(--color-surface-container);
+  border-radius: var(--rounded-xl);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+.motion-name {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-secondary);
+}
+.motion-spec {
+  font-family: var(--typography-headline-md-fontFamily);
+  font-size: var(--typography-headline-md-fontSize);
+  font-weight: var(--typography-headline-md-fontWeight);
+  letter-spacing: var(--typography-headline-md-letterSpacing);
+  color: var(--color-on-surface-display);
+}
+.motion-desc { color: var(--color-on-surface-muted); font-size: 0.8125rem; }
+
+/* ===== Components ===== */
+.demo-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-2xl);
+}
+@media (min-width: 880px) {
+  .demo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .demo.span-2 { grid-column: 1 / -1; }
+}
+.demo {
+  background: var(--color-surface-container);
+  border-radius: var(--rounded-2xl);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+.demo-eyebrow {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.demo-title {
+  font-family: var(--typography-title-lg-fontFamily);
+  font-size: var(--typography-title-lg-fontSize);
+  font-weight: var(--typography-title-lg-fontWeight);
+  letter-spacing: var(--typography-title-lg-letterSpacing);
+  color: var(--color-on-surface-display);
+  margin: 0;
+}
+.demo-row {
+  display: flex; flex-wrap: wrap; gap: var(--spacing-md);
+  align-items: center;
+}
+.demo-stage {
+  background: var(--color-surface);
+  border: 1px solid var(--color-chrome-divider);
+  border-radius: var(--rounded-lg);
+  padding: var(--spacing-xl);
+  display: flex; flex-wrap: wrap; gap: var(--spacing-md);
+  align-items: center;
+}
+.demo-note {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--spacing-sm);
+  font-family: var(--typography-label-sm-fontFamily);
+  font-size: var(--typography-label-sm-fontSize);
+  font-weight: var(--typography-label-sm-fontWeight);
+  line-height: var(--typography-label-sm-lineHeight);
+  letter-spacing: var(--typography-label-sm-letterSpacing);
+  text-transform: uppercase;
+  padding: 12px 20px;
+  border-radius: var(--rounded-full);
+  border: 0;
+  cursor: pointer;
+  transition: opacity var(--motion-hover), background-color var(--motion-hover), color var(--motion-hover);
+  white-space: nowrap;
+}
+.btn-primary { background: var(--color-primary); color: var(--color-on-primary); }
+.btn-primary:hover { opacity: 0.9; }
+.btn-secondary { background: var(--color-secondary); color: var(--color-on-secondary); }
+.btn-secondary:hover { opacity: 0.85; }
+.btn-ghost {
+  background: transparent;
+  color: var(--color-on-surface-muted);
+}
+.btn-ghost:hover { color: var(--color-on-surface); }
+.btn-destructive { background: var(--color-error); color: var(--color-on-error); }
+.btn-destructive:hover { opacity: 0.9; }
+.btn[disabled] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* Input */
+.input {
+  font-family: var(--typography-body-md-fontFamily);
+  font-size: var(--typography-body-md-fontSize);
+  line-height: var(--typography-body-md-lineHeight);
+  color: var(--color-on-surface);
+  background: var(--color-surface-container);
+  border: 0;
+  border-radius: var(--rounded-lg);
+  padding: 12px 16px;
+  width: 100%;
+  transition: box-shadow var(--motion-hover);
+}
+.demo-stage .input { background: var(--color-surface-container-high); }
+.input::placeholder { color: var(--color-on-surface-muted); }
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-secondary);
+}
+.input-error {
+  box-shadow: 0 0 0 1px var(--color-error);
+}
+.input-helper {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+  margin-top: var(--spacing-xs);
+}
+.input-helper.is-error { color: var(--color-error); }
+.input[disabled],
+.input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.field { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.field-label {
+  font-family: var(--typography-label-sm-fontFamily);
+  font-size: var(--typography-label-sm-fontSize);
+  font-weight: var(--typography-label-sm-fontWeight);
+  letter-spacing: var(--typography-label-sm-letterSpacing);
+  color: var(--color-on-surface-muted);
+  text-transform: uppercase;
+}
+
+/* Textarea + light WYSIWYG */
+.editor {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-container-high);
+  border-radius: var(--rounded-lg);
+  overflow: hidden;
+  transition: box-shadow var(--motion-hover);
+}
+.editor:focus-within {
+  box-shadow: 0 0 0 2px var(--color-secondary);
+}
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--color-chrome-divider);
+  background: var(--color-surface-container);
+}
+.editor-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-on-surface-muted);
+  border-radius: var(--rounded-sm);
+  cursor: pointer;
+  transition: background-color var(--motion-hover), color var(--motion-hover);
+}
+.editor-tool:hover { background: var(--color-surface-container-high); color: var(--color-on-surface); }
+.editor-tool.is-active { color: var(--color-on-surface-display); background: var(--color-surface-container-high); }
+.editor-tool svg { display: block; width: 14px; height: 14px; }
+.editor-divider {
+  width: 1px;
+  align-self: stretch;
+  margin: 4px 4px;
+  background: var(--color-chrome-divider);
+}
+.textarea {
+  font-family: var(--typography-body-md-fontFamily);
+  font-size: var(--typography-body-md-fontSize);
+  line-height: var(--typography-body-md-lineHeight);
+  color: var(--color-on-surface);
+  background: transparent;
+  border: 0;
+  padding: 12px 16px;
+  resize: vertical;
+  min-height: 96px;
+  width: 100%;
+  outline: none;
+}
+.textarea::placeholder { color: var(--color-on-surface-muted); }
+
+/* Card preview */
+.card-preview {
+  background: var(--color-surface-container);
+  border-radius: var(--rounded-2xl);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+.card-preview-eyebrow {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-secondary);
+}
+.card-preview-title {
+  font-family: var(--typography-title-lg-fontFamily);
+  font-size: var(--typography-title-lg-fontSize);
+  font-weight: var(--typography-title-lg-fontWeight);
+  letter-spacing: var(--typography-title-lg-letterSpacing);
+  color: var(--color-on-surface-display);
+  margin: 0;
+}
+.card-preview-body { color: var(--color-on-surface-muted); font-size: 0.875rem; line-height: 1.55; }
+.card-preview-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-chrome-divider);
+}
+
+/* Badges & tags */
+.badge, .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--typography-label-sm-fontFamily);
+  font-size: var(--typography-label-sm-fontSize);
+  font-weight: var(--typography-label-sm-fontWeight);
+  letter-spacing: var(--typography-label-sm-letterSpacing);
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: var(--rounded-full);
+  white-space: nowrap;
+}
+.badge { background: var(--color-neutral); color: var(--color-on-neutral); }
+.badge-success { background: var(--color-success); color: var(--color-on-success); }
+.badge-info { background: var(--color-info); color: var(--color-on-info); }
+.badge-error { background: var(--color-error); color: var(--color-on-error); }
+.tag { background: transparent; color: var(--color-on-surface-muted); border: 1px solid var(--color-outline); }
+.badge .dot, .tag .dot {
+  display: inline-block;
+  width: 6px; height: 6px; border-radius: var(--rounded-full);
+  background: currentColor;
+}
+
+/* Tabs */
+.tabs { display: flex; gap: var(--spacing-md); border-bottom: 1px solid var(--color-chrome-divider); }
+.tab {
+  font-family: var(--typography-label-sm-fontFamily);
+  font-size: var(--typography-label-sm-fontSize);
+  font-weight: var(--typography-label-sm-fontWeight);
+  letter-spacing: var(--typography-label-sm-letterSpacing);
+  text-transform: uppercase;
+  padding: 8px 16px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--color-on-surface-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color var(--motion-hover), border-color var(--motion-hover);
+}
+.tab:hover { color: var(--color-on-surface-display); }
+.tab.is-active { color: var(--color-on-surface-display); border-bottom-color: var(--color-primary); }
+
+/* Progress */
+.progress {
+  position: relative;
+  height: 4px;
+  background: var(--color-surface-container-high);
+  border-radius: var(--rounded-sm);
+  overflow: hidden;
+  width: 100%;
+}
+.progress-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: var(--color-primary);
+  border-radius: var(--rounded-sm);
+}
+.progress-row { display: flex; flex-direction: column; gap: var(--spacing-sm); width: 100%; }
+.progress-meta {
+  display: flex; justify-content: space-between;
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+}
+
+/* Modal preview */
+.modal-stage {
+  background: var(--color-surface);
+  border: 1px solid var(--color-chrome-divider);
+  border-radius: var(--rounded-lg);
+  padding: var(--spacing-2xl);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  min-height: 240px;
+  background-image:
+    linear-gradient(135deg,
+      rgba(208,185,130,0.05) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(139,92,246,0.05) 100%);
+}
+.modal {
+  background: var(--color-surface-container-high);
+  border: 1px solid var(--color-outline);
+  border-radius: var(--rounded-xl);
+  padding: var(--spacing-xl);
+  display: flex; flex-direction: column; gap: var(--spacing-lg);
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+.modal-title {
+  font-family: var(--typography-headline-md-fontFamily);
+  font-size: var(--typography-headline-md-fontSize);
+  font-weight: var(--typography-headline-md-fontWeight);
+  letter-spacing: var(--typography-headline-md-letterSpacing);
+  color: var(--color-on-surface-display);
+  margin: 0;
+}
+.modal-body { color: var(--color-on-surface-muted); font-size: 0.875rem; line-height: 1.55; }
+.modal-actions { display: flex; gap: var(--spacing-sm); justify-content: flex-end; }
+
+/* ===== Rules band (inverse) ===== */
+.rules-band {
+  background: var(--color-inverse-surface);
+  color: var(--color-on-inverse-surface);
+  padding: var(--spacing-6xl) 0;
+}
+.rules-band .section-title { color: var(--color-on-inverse-surface); }
+.rules-band .section-eyebrow .num { color: var(--color-on-inverse-surface); }
+.rules-band .section-eyebrow .label { color: rgba(10, 10, 14, 0.6); }
+.rules-band .section-lede { color: rgba(10, 10, 14, 0.7); }
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--spacing-xl);
+}
+.rule {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xl);
+  background: rgba(10, 10, 14, 0.04);
+  border: 1px solid rgba(10, 10, 14, 0.08);
+  border-radius: var(--rounded-xl);
+}
+.rule-num {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: rgba(10, 10, 14, 0.5);
+}
+.rule-title {
+  font-family: var(--typography-title-lg-fontFamily);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--color-on-inverse-surface);
+  margin: 0;
+}
+.rule-body {
+  color: rgba(10, 10, 14, 0.72);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  margin: 0;
+}
+.rule-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  align-self: flex-start;
+  margin-top: var(--spacing-sm);
+  padding: 3px 10px;
+  border-radius: var(--rounded-full);
+  background: var(--color-secondary);
+  color: var(--color-on-secondary);
+  font-family: var(--typography-label-sm-fontFamily);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ===== Footer ===== */
+.footer {
+  padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+  border-top: 1px solid var(--color-chrome-divider);
+}
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: var(--spacing-md);
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.footer-brand { color: var(--color-on-surface-display); }
+
+/* ===== Helpers ===== */
+.muted { color: var(--color-on-surface-muted); }
+.gold { color: var(--color-secondary); }
+.cream { color: var(--color-on-surface-display); }
+
+/* ===== Icons (Heroicons solid, functional only) ===== */
+.icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  fill: currentColor;
+  vertical-align: middle;
+}
+.icon-sm { width: 16px; height: 16px; }
+.icon-lg { width: 32px; height: 32px; }
+.icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* Iconography section, épuré, no container */
+.icon-sizes-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4xl);
+  padding: var(--spacing-md) 0 var(--spacing-xl);
+}
+.icon-size-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+.icon-size-item .icon { color: var(--color-on-surface-display); }
+.icon-size-label {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-on-surface-muted);
+}
+
+.icon-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: var(--spacing-4xl);
+  row-gap: 0;
+}
+@media (min-width: 800px) {
+  .icon-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.icon-line {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: var(--spacing-lg);
+  row-gap: 2px;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-chrome-divider);
+  align-items: center;
+}
+.icon-line .icon { grid-row: 1 / 3; align-self: center; color: var(--color-on-surface-display); }
+.icon-line-name {
+  font-family: var(--typography-mono-md-fontFamily);
+  font-size: var(--typography-mono-md-fontSize);
+  color: var(--color-on-surface-display);
+  align-self: end;
+  line-height: 1.2;
+}
+.icon-line-usage {
+  font-family: var(--typography-body-md-fontFamily);
+  font-size: 0.75rem;
+  color: var(--color-on-surface-muted);
+  align-self: start;
+  line-height: 1.4;
+}
+
+/* Mobile responsive overrides */
+@media (max-width: 720px) {
+  .vision { padding: var(--spacing-5xl) 0 var(--spacing-4xl); }
+  .section { padding: var(--spacing-5xl) 0; }
+  .rules-band { padding: var(--spacing-5xl) 0; }
+  .vision-title { font-size: 2.5rem; line-height: 1.06; }
+  .section-title { font-size: 1.75rem; line-height: 1.15; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ Heroicons solid sprite (MIT-licensed, Tailwind Labs) ============ -->
+<svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M5.47 18.53a.75.75 0 001.06 0l11.47-11.47v6.69a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75H10.25a.75.75 0 000 1.5h6.69L5.47 17.47a.75.75 0 000 1.06z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 008.279 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036a2.63 2.63 0 001.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258a2.63 2.63 0 00-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5zM16.5 15a.75.75 0 01.712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 010 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 01-1.422 0l-.395-1.183a1.5 1.5 0 00-.948-.948l-1.183-.395a.75.75 0 010-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0116.5 15z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-x-circle" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-exclamation-triangle" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-x-mark" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-bars-3" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-book-open" viewBox="0 0 24 24">
+    <path d="M11.25 4.533A9.707 9.707 0 006 3a9.735 9.735 0 00-3.25.555.75.75 0 00-.5.707v14.25a.75.75 0 001 .708A8.237 8.237 0 016 18.75c1.995 0 3.823.707 5.25 1.886V4.533zM12.75 20.636A8.214 8.214 0 0118 18.75c.966 0 1.89.166 2.75.47a.75.75 0 001-.708V4.262a.75.75 0 00-.5-.707A9.735 9.735 0 0018 3a9.707 9.707 0 00-5.25 1.533v16.103z"/>
+  </symbol>
+  <symbol id="i-code-bracket" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M14.447 3.026a.75.75 0 01.527.921l-4.5 16.5a.75.75 0 01-1.448-.394l4.5-16.5a.75.75 0 01.921-.527zM16.72 6.22a.75.75 0 011.06 0l5.25 5.25a.75.75 0 010 1.06l-5.25 5.25a.75.75 0 11-1.06-1.06L21.44 12l-4.72-4.72a.75.75 0 010-1.06zm-9.44 0a.75.75 0 010 1.06L2.56 12l4.72 4.72a.75.75 0 11-1.06 1.06L.97 12.53a.75.75 0 010-1.06l5.25-5.25a.75.75 0 011.06 0z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-clipboard-document" viewBox="0 0 24 24">
+    <path d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0121 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 017.5 16.125V3.375z"/>
+    <path d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z"/>
+  </symbol>
+  <symbol id="i-arrow-down-tray" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-cog-6-tooth" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-user-circle" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-funnel" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M3.792 2.938A49.069 49.069 0 0112 2.25c2.797 0 5.54.236 8.209.688a1.857 1.857 0 011.541 1.836v1.044a3 3 0 01-.879 2.121l-6.182 6.182a1.5 1.5 0 00-.439 1.061v2.927a3 3 0 01-1.658 2.684l-1.757.878A.75.75 0 019.75 21v-5.818a1.5 1.5 0 00-.44-1.06L3.13 7.938a3 3 0 01-.879-2.121V4.774c0-.897.64-1.683 1.542-1.836z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="i-globe-alt" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM4.575 15.6a8.25 8.25 0 009.348 4.425 1.966 1.966 0 00-1.84-1.275.983.983 0 01-.97-.822l-.073-.437c-.094-.565.25-1.11.8-1.267l.99-.282c.427-.123.783-.418.982-.816l.036-.073a1.453 1.453 0 012.328-.377L16.5 15h.628a2.25 2.25 0 011.983 1.186 8.25 8.25 0 00-6.345-12.4c.044.262.18.503.389.676l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.575 15.6z" clip-rule="evenodd"/>
+  </symbol>
+</svg>
+
+<!-- ============ Topbar ============ -->
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a href="#vision" class="topbar-brand">TravelSkills.io</a>
+    <span class="topbar-version">DS · v0.1 · alpha</span>
+    <div class="topbar-actions">
+      <a class="btn btn-ghost" href="#components">Composants</a>
+      <a class="btn btn-secondary" href="#rules">Règles</a>
+    </div>
+    <button type="button" class="topbar-menu-toggle" aria-expanded="false" aria-controls="topbar-menu" aria-label="Ouvrir le menu">
+      <svg class="icon icon-burger" aria-hidden="true"><use href="#i-bars-3"/></svg>
+      <svg class="icon icon-close" aria-hidden="true"><use href="#i-x-mark"/></svg>
+    </button>
+  </div>
+  <nav class="topbar-menu" id="topbar-menu" aria-label="Sommaire mobile">
+    <div class="container topbar-menu-inner">
+      <ul class="topbar-menu-list">
+        <li><a class="topbar-menu-link" href="#vision"><span class="topbar-menu-num">01</span><span>Vision</span></a></li>
+        <li><a class="topbar-menu-link" href="#foundations"><span class="topbar-menu-num">02</span><span>Foundations</span></a></li>
+        <li><a class="topbar-menu-link" href="#tokens"><span class="topbar-menu-num">03</span><span>Tokens</span></a></li>
+        <li><a class="topbar-menu-link" href="#iconography"><span class="topbar-menu-num">04</span><span>Iconographie</span></a></li>
+        <li><a class="topbar-menu-link" href="#components"><span class="topbar-menu-num">05</span><span>Composants</span></a></li>
+        <li><a class="topbar-menu-link" href="#rules" style="border-bottom:0;"><span class="topbar-menu-num">06</span><span>Règles</span></a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ Side TOC ============ -->
+<nav class="toc" aria-label="Sommaire">
+  <span class="toc-label">Showcase</span>
+  <a href="#vision">01 · Vision</a>
+  <a href="#foundations">02 · Foundations</a>
+  <a href="#tokens">03 · Tokens</a>
+  <a href="#iconography">04 · Iconography</a>
+  <a href="#components">05 · Components</a>
+  <a href="#rules">06 · Rules</a>
+</nav>
+
+<!-- ============ Vision ============ -->
+<section class="vision" id="vision">
+  <div class="container">
+    <span class="vision-eyebrow">
+      <span class="num">01</span>
+      <span class="sep">·</span>
+      <span class="label">Vision</span>
+    </span>
+    <h1 class="vision-title">Le langage visuel.</h1>
+    <p class="vision-lede">
+      On construit une bibliothèque de skills IA pour les pros du voyage et du tourisme. La donnée d'entrée vient du terrain (entretiens, retours d'agents, audits opérationnels) plutôt que du prompt engineering. Le projet est open-source sur GitHub, et s'enrichira de briques technologiques et de services à mesure que le produit avance. Ce design system vise à donner une cohérence visuelle au produit et aux services associés.
+    </p>
+    <dl class="vision-meta">
+      <div>
+        <dt>Color mode</dt>
+        <dd>Dark, single mode</dd>
+      </div>
+      <div>
+        <dt>Type system</dt>
+        <dd>Geist · Geist Mono</dd>
+      </div>
+      <div>
+        <dt>Registre</dt>
+        <dd>Tech-opérationnel</dd>
+      </div>
+      <div>
+        <dt>Statut</dt>
+        <dd>Alpha · v0.1</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ Foundations ============ -->
+<section class="section" id="foundations">
+  <div class="container">
+    <header class="section-head">
+      <span class="section-eyebrow">
+        <span class="num">02</span>
+        <span class="label">Foundations</span>
+      </span>
+      <div>
+        <h2 class="section-title">Trois piliers, une intention.</h2>
+        <p class="section-lede">
+          Chaque décision visuelle remonte à une de ces trois fondations.
+          Elles cadrent les arbitrages futurs et conservent la cohérence à mesure que la plateforme grandit.
+        </p>
+      </div>
+    </header>
+
+    <div class="foundations-grid">
+      <article class="foundation">
+        <div class="foundation-head">
+          <span class="foundation-num">01</span>
+          <span class="foundation-symbol" aria-hidden="true">●</span>
+        </div>
+        <h3 class="foundation-title">Sobriété opérationnelle</h3>
+        <p class="foundation-body">
+          Surface sombre, palette réservée, espaces vides généreux. Chaque accent est fonctionnel, jamais décoratif. Le contenu reste le sujet, l'interface s'efface.
+        </p>
+      </article>
+      <article class="foundation">
+        <div class="foundation-head">
+          <span class="foundation-num">02</span>
+          <span class="foundation-symbol" aria-hidden="true">▲</span>
+        </div>
+        <h3 class="foundation-title">Hiérarchie sur un axe</h3>
+        <p class="foundation-body">
+          Une seule famille de typo, une échelle compacte de 8 rôles, un rythme vertical aligné sur la suite géométrique 4–8–12–16–24–32–48–64–96–128. La densité respire.
+        </p>
+      </article>
+      <article class="foundation">
+        <div class="foundation-head">
+          <span class="foundation-num">03</span>
+          <span class="foundation-symbol" aria-hidden="true">◆</span>
+        </div>
+        <h3 class="foundation-title">L'or, signature fonctionnelle</h3>
+        <p class="foundation-body">
+          Le champagne <span class="gold">#D0B982</span> est la signature du système. Il vit sur les CTA secondaires, les états focus, le hover des liens et la numérotation des sections. Jamais en remplissage décoratif.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Tokens ============ -->
+<section class="section" id="tokens">
+  <div class="container">
+    <header class="section-head">
+      <span class="section-eyebrow">
+        <span class="num">03</span>
+        <span class="label">Tokens</span>
+      </span>
+      <div>
+        <h2 class="section-title">Les valeurs sources.</h2>
+        <p class="section-lede">
+          Couleurs, typographie, espaces, rayons, mouvement. Toutes les valeurs vivent dans <code style="font-family:var(--typography-mono-md-fontFamily);font-size:0.75rem;background:var(--color-surface-container);padding:2px 6px;border-radius:4px;">DESIGN.md</code> et sont exportées en CSS, JSON DTCG et Tailwind theme.
+        </p>
+      </div>
+    </header>
+
+    <!-- Couleurs -->
+    <div class="subsection">
+      <h3 class="subsection-title">Couleurs</h3>
+      <div class="color-gallery">
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-primary);">
+            <span class="pair-on" style="color:var(--color-on-primary);">on-primary</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Primary</span>
+            <span class="swatch-token">colors.primary</span>
+            <span class="swatch-hex">#FFFFFF</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-secondary);">
+            <span class="pair-on" style="color:var(--color-on-secondary);">on-secondary</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Secondary · Champagne</span>
+            <span class="swatch-token">colors.secondary</span>
+            <span class="swatch-hex">#D0B982</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-surface);border-bottom:1px solid var(--color-outline);">
+            <span class="pair-on" style="color:var(--color-on-surface);">on-surface</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Surface</span>
+            <span class="swatch-token">colors.surface</span>
+            <span class="swatch-hex">#0A0A0E</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-surface-container);">
+            <span class="pair-on" style="color:var(--color-on-surface);">on-surface</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Surface · Container</span>
+            <span class="swatch-token">colors.surface-container</span>
+            <span class="swatch-hex">#191B24</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-surface-container-high);">
+            <span class="pair-on" style="color:var(--color-on-surface);">on-surface</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Surface · Container High</span>
+            <span class="swatch-token">colors.surface-container-high</span>
+            <span class="swatch-hex">#22242E</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-inverse-surface);">
+            <span class="pair-on" style="color:var(--color-on-inverse-surface);">on-inverse-surface</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Inverse · Cream</span>
+            <span class="swatch-token">colors.inverse-surface</span>
+            <span class="swatch-hex">#F0EDE7</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-on-surface-display);">
+            <span class="pair-on" style="color:var(--color-surface);">surface</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Display Text · Cream</span>
+            <span class="swatch-token">colors.on-surface-display</span>
+            <span class="swatch-hex">#F0EDE7</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-on-surface-muted);">
+            <span class="pair-on" style="color:var(--color-surface);">surface</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Muted</span>
+            <span class="swatch-token">colors.on-surface-muted</span>
+            <span class="swatch-hex">#9CA3AF</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-neutral);">
+            <span class="pair-on" style="color:var(--color-on-neutral);">on-neutral</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Neutral</span>
+            <span class="swatch-token">colors.neutral</span>
+            <span class="swatch-hex">#27272A</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-success);">
+            <span class="pair-on" style="color:var(--color-on-success);">on-success</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Success</span>
+            <span class="swatch-token">colors.success</span>
+            <span class="swatch-hex">#10B981</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-info);">
+            <span class="pair-on" style="color:var(--color-on-info);">on-info</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Info · AI</span>
+            <span class="swatch-token">colors.info</span>
+            <span class="swatch-hex">#8B5CF6</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-fill" style="background:var(--color-error);">
+            <span class="pair-on" style="color:var(--color-on-error);">on-error</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Error</span>
+            <span class="swatch-token">colors.error</span>
+            <span class="swatch-hex">#EF4444</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typographie -->
+    <div class="subsection">
+      <h3 class="subsection-title">Typographie</h3>
+      <div class="type-table">
+        <div class="type-row">
+          <span class="type-meta-name">display</span>
+          <span class="type-meta-spec">64 / 600 / -0.02em</span>
+          <span class="type-sample" style="font-family:var(--typography-display-fontFamily); font-size:3rem; font-weight:600; line-height:1.06; letter-spacing:-0.02em;">Construire le voyage.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-meta-name">headline-lg</span>
+          <span class="type-meta-spec">40 / 600 / -0.015em</span>
+          <span class="type-sample" style="font-family:var(--typography-headline-lg-fontFamily); font-size:2rem; font-weight:600; line-height:1.1; letter-spacing:-0.015em;">Skills par métier</span>
+        </div>
+        <div class="type-row">
+          <span class="type-meta-name">headline-md</span>
+          <span class="type-meta-spec">24 / 600 / -0.01em</span>
+          <span class="type-sample" style="font-family:var(--typography-headline-md-fontFamily); font-size:1.5rem; font-weight:600; line-height:1.25; letter-spacing:-0.01em;">Tour-opérateur · packages</span>
+        </div>
+        <div class="type-row">
+          <span class="type-meta-name">title-lg</span>
+          <span class="type-meta-spec">20 / 600 / -0.005em</span>
+          <span class="type-sample" style="font-family:var(--typography-title-lg-fontFamily); font-size:1.25rem; font-weight:600; line-height:1.3; letter-spacing:-0.005em;">Carte d'un skill</span>
+        </div>
+        <div class="type-row">
+          <span class="type-meta-name">body-lg</span>
+          <span class="type-meta-spec">16 / 400</span>
+          <span class="type-sample is-body" style="font-family:var(--typography-body-lg-fontFamily); font-size:1rem; line-height:1.5;">La matière de terrain (entretiens, retours d'agents, audits opérationnels) est la donnée d'entrée. Le skill est la sortie.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-meta-name">body-md</span>
+          <span class="type-meta-spec">14 / 400</span>
+          <span class="type-sample is-body" style="font-family:var(--typography-body-md-fontFamily); font-size:0.875rem; line-height:1.5;">Texte secondaire pour les listes denses, les champs de formulaire et les descriptifs de carte.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-meta-name">label-sm</span>
+          <span class="type-meta-spec">12 / 500 / 0.02em</span>
+          <span class="type-sample is-label" style="font-family:var(--typography-label-sm-fontFamily); font-size:0.75rem; font-weight:500; letter-spacing:0.02em; text-transform:uppercase;">EXPLORER LES SKILLS</span>
+        </div>
+        <div class="type-row">
+          <span class="type-meta-name">mono-md</span>
+          <span class="type-meta-spec">13 / 400 / Geist Mono</span>
+          <span class="type-sample is-mono" style="font-family:var(--typography-mono-md-fontFamily); font-size:0.8125rem;">01 · sourcing · 02 · qualification · 03 · compilation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacing -->
+    <div class="subsection">
+      <h3 class="subsection-title">Espacements</h3>
+      <div class="spacing-scale">
+        <div class="spacing-row">
+          <span class="spacing-token">xs</span><span class="spacing-value">4 px</span>
+          <span class="spacing-bar" style="width:4px;"></span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">sm</span><span class="spacing-value">8 px</span>
+          <span class="spacing-bar" style="width:8px;"></span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">md</span><span class="spacing-value">12 px</span>
+          <span class="spacing-bar" style="width:12px;"></span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">lg</span><span class="spacing-value">16 px</span>
+          <span class="spacing-bar" style="width:16px;"></span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">xl</span><span class="spacing-value">24 px</span>
+          <span class="spacing-bar" style="width:24px;"></span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">2xl</span><span class="spacing-value">32 px</span>
+          <span class="spacing-bar" style="width:32px;"></span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">3xl</span><span class="spacing-value">48 px</span>
+          <span class="spacing-bar" style="width:48px;"></span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">4xl</span><span class="spacing-value">64 px</span>
+          <span class="spacing-bar" style="width:64px;"></span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">5xl</span><span class="spacing-value">96 px</span>
+          <span class="spacing-bar" style="width:96px;"></span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">6xl</span><span class="spacing-value">128 px</span>
+          <span class="spacing-bar" style="width:128px;"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rounded -->
+    <div class="subsection">
+      <h3 class="subsection-title">Rayons d'angle</h3>
+      <div class="rounded-grid">
+        <div class="rounded-cell">
+          <div class="rounded-shape" style="border-radius:var(--rounded-sm);"></div>
+          <div class="rounded-meta"><span class="rounded-name">sm</span><span class="rounded-value">4 px · code</span></div>
+        </div>
+        <div class="rounded-cell">
+          <div class="rounded-shape" style="border-radius:var(--rounded-md);"></div>
+          <div class="rounded-meta"><span class="rounded-name">md</span><span class="rounded-value">8 px</span></div>
+        </div>
+        <div class="rounded-cell">
+          <div class="rounded-shape" style="border-radius:var(--rounded-lg);"></div>
+          <div class="rounded-meta"><span class="rounded-name">lg</span><span class="rounded-value">12 px · input</span></div>
+        </div>
+        <div class="rounded-cell">
+          <div class="rounded-shape" style="border-radius:var(--rounded-xl);"></div>
+          <div class="rounded-meta"><span class="rounded-name">xl</span><span class="rounded-value">16 px · modal</span></div>
+        </div>
+        <div class="rounded-cell">
+          <div class="rounded-shape" style="border-radius:var(--rounded-2xl);"></div>
+          <div class="rounded-meta"><span class="rounded-name">2xl</span><span class="rounded-value">24 px · card</span></div>
+        </div>
+        <div class="rounded-cell">
+          <div class="rounded-shape" style="border-radius:var(--rounded-full);"></div>
+          <div class="rounded-meta"><span class="rounded-name">full</span><span class="rounded-value">9999 · pill</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motion -->
+    <div class="subsection">
+      <h3 class="subsection-title">Mouvement</h3>
+      <div class="motion-grid">
+        <div class="motion-card">
+          <span class="motion-name">motion.hover</span>
+          <span class="motion-spec">150 ms · ease-out</span>
+          <span class="motion-desc">Hover sur boutons, liens, cartes interactives.</span>
+        </div>
+        <div class="motion-card">
+          <span class="motion-name">motion.overlay</span>
+          <span class="motion-spec">250 ms · ease-in-out</span>
+          <span class="motion-desc">Apparition des modales et popovers.</span>
+        </div>
+        <div class="motion-card">
+          <span class="motion-name">elevation</span>
+          <span class="motion-spec">Tonale, jamais d'ombre</span>
+          <span class="motion-desc">surface → container → container-high. Ombres réservées aux modales.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Iconography ============ -->
+<section class="section" id="iconography">
+  <div class="container">
+    <header class="section-head">
+      <span class="section-eyebrow">
+        <span class="num">04</span>
+        <span class="label">Iconography</span>
+      </span>
+      <div>
+        <h2 class="section-title">Icônes fonctionnelles, jamais décoratives.</h2>
+        <p class="section-lede">
+          Les icônes renforcent l'affordance d'une action, le sens d'un statut, ou le repérage d'une navigation. Elles ne décorent jamais. Le système utilise <strong>Heroicons (solid)</strong> de Tailwind Labs, sous licence MIT. Pour les besoins illustratifs (hero, profession, vide d'état), des visuels sur-mesure sont produits hors système.
+        </p>
+      </div>
+    </header>
+
+    <div class="subsection">
+      <h3 class="subsection-title">Tailles</h3>
+      <div class="icon-sizes-row">
+        <div class="icon-size-item">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="#i-check-circle"/></svg>
+          <span class="icon-size-label">16 px · spacing.lg</span>
+        </div>
+        <div class="icon-size-item">
+          <svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg>
+          <span class="icon-size-label">24 px · spacing.xl</span>
+        </div>
+        <div class="icon-size-item">
+          <svg class="icon icon-lg" aria-hidden="true"><use href="#i-check-circle"/></svg>
+          <span class="icon-size-label">32 px · spacing.2xl</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">Inventaire</h3>
+      <div class="icon-list">
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <span class="icon-line-name">search</span>
+          <span class="icon-line-usage">Recherche, palette de commandes</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-book-open"/></svg>
+          <span class="icon-line-name">book-open</span>
+          <span class="icon-line-usage">Lire un skill, consulter la documentation</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-code-bracket"/></svg>
+          <span class="icon-line-name">code-bracket</span>
+          <span class="icon-line-usage">Voir la source, ouvrir le repo GitHub</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-clipboard-document"/></svg>
+          <span class="icon-line-name">clipboard-document</span>
+          <span class="icon-line-usage">Copier un snippet de code</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-down-tray"/></svg>
+          <span class="icon-line-name">arrow-down-tray</span>
+          <span class="icon-line-usage">Télécharger un skill ou un fichier</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-funnel"/></svg>
+          <span class="icon-line-name">funnel</span>
+          <span class="icon-line-usage">Filtrer par profil métier ou facette</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-user-circle"/></svg>
+          <span class="icon-line-name">user-circle</span>
+          <span class="icon-line-usage">Compte, profil utilisateur</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-cog-6-tooth"/></svg>
+          <span class="icon-line-name">cog-6-tooth</span>
+          <span class="icon-line-usage">Réglages, configuration</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-globe-alt"/></svg>
+          <span class="icon-line-name">globe-alt</span>
+          <span class="icon-line-usage">Sélecteur de langue, locale</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-bars-3"/></svg>
+          <span class="icon-line-name">bars-3</span>
+          <span class="icon-line-usage">Menu mobile, navigation principale</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          <span class="icon-line-name">arrow-right</span>
+          <span class="icon-line-usage">Action de continuation, CTA principal</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+          <span class="icon-line-name">arrow-up-right</span>
+          <span class="icon-line-usage">Lien externe, ouverture hors site</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+          <span class="icon-line-name">chevron-right</span>
+          <span class="icon-line-usage">Repérage de navigation, suite</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          <span class="icon-line-name">chevron-down</span>
+          <span class="icon-line-usage">Trigger dropdown, accordéon</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg>
+          <span class="icon-line-name">check-circle</span>
+          <span class="icon-line-usage">Validation, statut stable</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg>
+          <span class="icon-line-name">sparkles</span>
+          <span class="icon-line-usage">Marqueur IA, inférence</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-x-circle"/></svg>
+          <span class="icon-line-name">x-circle</span>
+          <span class="icon-line-usage">Erreur de validation, statut échec</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-exclamation-triangle"/></svg>
+          <span class="icon-line-name">exclamation-triangle</span>
+          <span class="icon-line-usage">Alerte avant action irréversible</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg>
+          <span class="icon-line-name">trash</span>
+          <span class="icon-line-usage">Suppression, action destructive</span>
+        </div>
+        <div class="icon-line">
+          <svg class="icon" aria-hidden="true"><use href="#i-x-mark"/></svg>
+          <span class="icon-line-name">x-mark</span>
+          <span class="icon-line-usage">Fermeture, dismiss</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Components ============ -->
+<section class="section" id="components">
+  <div class="container">
+    <header class="section-head">
+      <span class="section-eyebrow">
+        <span class="num">05</span>
+        <span class="label">Components</span>
+      </span>
+      <div>
+        <h2 class="section-title">Le langage de l'interface.</h2>
+        <p class="section-lede">
+          Boutons, champs, cartes, badges, tabulations, progression, modale. Le minimum nécessaire pour construire chaque écran de la plateforme avec une homogénéité totale.
+        </p>
+      </div>
+    </header>
+
+    <div class="demo-grid">
+
+      <!-- Buttons -->
+      <article class="demo">
+        <div>
+          <span class="demo-eyebrow">CTA · pill</span>
+          <h3 class="demo-title">Boutons</h3>
+        </div>
+        <div class="demo-stage">
+          <button type="button" class="btn btn-primary"><span>Explorer les skills</span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+          <button type="button" class="btn btn-secondary">Devenir partenaire</button>
+        </div>
+        <div class="demo-stage">
+          <button type="button" class="btn btn-ghost">En savoir plus</button>
+          <button type="button" class="btn btn-destructive"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-trash"/></svg><span>Supprimer</span></button>
+          <button type="button" class="btn btn-primary" disabled>Désactivé</button>
+        </div>
+        <p class="demo-note">primary = blanc · secondary = or champagne · ghost = transparent · destructive = rouge.</p>
+      </article>
+
+      <!-- Inputs -->
+      <article class="demo">
+        <div>
+          <span class="demo-eyebrow">Form field</span>
+          <h3 class="demo-title">Champs</h3>
+        </div>
+        <div class="demo-stage" style="flex-direction:column; align-items:stretch; gap:var(--spacing-lg);">
+          <div class="field">
+            <label class="field-label" for="demo-email">Email</label>
+            <input id="demo-email" type="email" class="input" placeholder="vous@exemple.com" />
+            <p class="input-helper">Pas de bordure par défaut. Le contraste tonal suffit comme affordance.</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="demo-error">Validation erreur</label>
+            <input id="demo-error" type="text" class="input input-error" value="Saisie invalide" />
+            <p class="input-helper is-error">Format d'email attendu.</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="demo-disabled">Désactivé</label>
+            <input id="demo-disabled" type="text" class="input" value="Lecture seule" disabled />
+            <p class="input-helper">Opacité réduite, pas d'interaction.</p>
+          </div>
+        </div>
+        <p class="demo-note">Focus = halo or 2 px. Erreur = bordure rouge 1 px. Disabled = opacité 0.45.</p>
+      </article>
+
+      <!-- Card -->
+      <article class="demo">
+        <div>
+          <span class="demo-eyebrow">Surface · 2xl radius</span>
+          <h3 class="demo-title">Carte</h3>
+        </div>
+        <div class="demo-stage" style="background:var(--color-surface);">
+          <div class="card-preview">
+            <span class="card-preview-eyebrow">01 · Sourcing</span>
+            <h4 class="card-preview-title">Conseiller en agence</h4>
+            <p class="card-preview-body">Skill construit à partir de 12 entretiens terrain et de 30 dossiers anonymisés.</p>
+            <div class="card-preview-foot">
+              <span class="badge badge-success"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check-circle"/></svg>Stable</span>
+              <span class="muted" style="font-family:var(--typography-mono-md-fontFamily);font-size:0.6875rem;">v0.4 · 2026-04</span>
+            </div>
+          </div>
+        </div>
+        <p class="demo-note">Pas d'ombre. La séparation est tonale. Padding = spacing.xl.</p>
+      </article>
+
+      <!-- Badges -->
+      <article class="demo">
+        <div>
+          <span class="demo-eyebrow">Status</span>
+          <h3 class="demo-title">Badges &amp; tags</h3>
+        </div>
+        <div class="demo-stage">
+          <span class="badge"><span class="dot"></span>Neutral</span>
+          <span class="badge badge-success"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check-circle"/></svg>Success</span>
+          <span class="badge badge-info"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-sparkles"/></svg>AI</span>
+          <span class="badge badge-error"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-x-circle"/></svg>Error</span>
+          <span class="tag">tag · outline</span>
+        </div>
+        <p class="demo-note">Couleurs sémantiques. Pas de warning, par décision.</p>
+      </article>
+
+      <!-- Tabs -->
+      <article class="demo">
+        <div>
+          <span class="demo-eyebrow">Navigation interne</span>
+          <h3 class="demo-title">Tabs</h3>
+        </div>
+        <div class="demo-stage" style="flex-direction:column; align-items:stretch;">
+          <div class="tabs" role="tablist">
+            <button class="tab is-active" type="button" role="tab" aria-selected="true">Pulse</button>
+            <button class="tab" type="button" role="tab" aria-selected="false">For me</button>
+            <button class="tab" type="button" role="tab" aria-selected="false">Popular</button>
+            <button class="tab" type="button" role="tab" aria-selected="false">Recent</button>
+          </div>
+        </div>
+        <p class="demo-note">Underline 2 px en primary blanc. Traitement minimal.</p>
+      </article>
+
+      <!-- Progress -->
+      <article class="demo">
+        <div>
+          <span class="demo-eyebrow">Indicator</span>
+          <h3 class="demo-title">Progression</h3>
+        </div>
+        <div class="demo-stage" style="flex-direction:column; align-items:stretch; gap:var(--spacing-xl);">
+          <div class="progress-row">
+            <div class="progress-meta"><span>Token usage</span><span>72%</span></div>
+            <div class="progress"><div class="progress-fill" style="width:72%;"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-meta"><span>Skills publiés</span><span>4 / 12</span></div>
+            <div class="progress"><div class="progress-fill" style="width:33%;"></div></div>
+          </div>
+        </div>
+        <p class="demo-note">Track = surface-container-high · fill = primary blanc.</p>
+      </article>
+
+      <!-- Modal -->
+      <article class="demo span-2">
+        <div>
+          <span class="demo-eyebrow">Overlay</span>
+          <h3 class="demo-title">Modale</h3>
+        </div>
+        <div class="modal-stage">
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+            <h4 id="demo-modal-title" class="modal-title">Retirer ce membre ?</h4>
+            <p class="modal-body">L'accès au workspace TravelSkills sera révoqué immédiatement. L'action reste réversible, l'invitation peut être renvoyée à tout moment.</p>
+            <div class="modal-actions">
+              <button type="button" class="btn btn-ghost">Annuler</button>
+              <button type="button" class="btn btn-destructive"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-trash"/></svg><span>Retirer</span></button>
+            </div>
+          </div>
+        </div>
+        <p class="demo-note">surface-container-high + outline + ombre douce. Radius xl, plus serré que la carte.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ Rules (inverse band) ============ -->
+<section class="rules-band" id="rules">
+  <div class="container">
+    <header class="section-head">
+      <span class="section-eyebrow">
+        <span class="num">06</span>
+        <span class="label">Rules</span>
+      </span>
+      <div>
+        <h2 class="section-title">Les 10 règles à tenir.</h2>
+        <p class="section-lede">
+          Les invariants du système, réduits à dix pour rester actionnables par un humain comme par un agent IA qui contribuera à la plateforme.
+        </p>
+      </div>
+    </header>
+
+    <div class="rules-grid">
+
+      <article class="rule">
+        <span class="rule-num">Règle 01</span>
+        <h3 class="rule-title">Primary reste blanc, secondary reste or.</h3>
+        <p class="rule-body">CTA principal = pill blanc. CTA secondaire, focus, hover de lien, numérotation = champagne <span class="gold">#D0B982</span>. Ne jamais inverser. Ne jamais utiliser l'or en remplissage décoratif.</p>
+        <span class="rule-tag">Identity</span>
+      </article>
+
+      <article class="rule">
+        <span class="rule-num">Règle 02</span>
+        <h3 class="rule-title">Display et heading en crème, body en blanc pur.</h3>
+        <p class="rule-body">display, headline-lg, headline-md, title-lg → <code style="font-family:var(--typography-mono-md-fontFamily);background:rgba(10,10,14,0.06);padding:1px 6px;border-radius:4px;">on-surface-display</code>. body-lg, body-md, label-sm → <code style="font-family:var(--typography-mono-md-fontFamily);background:rgba(10,10,14,0.06);padding:1px 6px;border-radius:4px;">on-surface</code>. La répartition chromatique est fonctionnelle.</p>
+        <span class="rule-tag">Type</span>
+      </article>
+
+      <article class="rule">
+        <span class="rule-num">Règle 03</span>
+        <h3 class="rule-title">Le focus est or et toujours en outline.</h3>
+        <p class="rule-body">2 px outline en secondary, offset 2 px, sur tous les contrôles interactifs. Ne jamais remplacer le focus par un changement de fond ou de halo. Ne jamais utiliser primary. Le halo blanc est trop bruyant sur surface sombre.</p>
+        <span class="rule-tag">A11y</span>
+      </article>
+
+      <article class="rule">
+        <span class="rule-num">Règle 04</span>
+        <h3 class="rule-title">L'élévation est tonale, pas ombrée.</h3>
+        <p class="rule-body">surface → surface-container → surface-container-high. Les cartes n'ont jamais d'ombre, la différentielle tonale suffit. Les ombres restent réservées aux modales et popovers.</p>
+        <span class="rule-tag">Depth</span>
+      </article>
+
+      <article class="rule">
+        <span class="rule-num">Règle 05</span>
+        <h3 class="rule-title">Les inputs n'ont pas de bordure par défaut.</h3>
+        <p class="rule-body">L'affordance vient du contraste tonal de surface-container. Bordure visible uniquement au focus (halo or) ou en validation d'erreur (1 px rouge).</p>
+        <span class="rule-tag">Form</span>
+      </article>
+
+      <article class="rule">
+        <span class="rule-num">Règle 06</span>
+        <h3 class="rule-title">Pill pour les actions, généreux pour les conteneurs, serré pour le mono.</h3>
+        <p class="rule-body">rounded.full sur boutons, badges, tags. rounded.2xl sur cartes. rounded.xl sur modales. rounded.lg sur inputs. rounded.sm sur blocs de code. Jamais full sur un conteneur.</p>
+        <span class="rule-tag">Shape</span>
+      </article>
+
+      <article class="rule">
+        <span class="rule-num">Règle 07</span>
+        <h3 class="rule-title">Erreurs en rouge, succès en vert, IA en violet, pas de warning.</h3>
+        <p class="rule-body">error pour destructif et validation seulement. success pour les états complétés. info (violet) pour les marqueurs IA / inférence. Pas de token warning. Les états ambigus retombent en neutral ou info.</p>
+        <span class="rule-tag">Semantic</span>
+      </article>
+
+      <article class="rule">
+        <span class="rule-num">Règle 08</span>
+        <h3 class="rule-title">Espacement uniquement sur l'échelle géométrique.</h3>
+        <p class="rule-body">4–8–12–16–24–32–48–64–96–128. spacing.6xl entre sections majeures, spacing.4xl entre figures, spacing.xl en padding de carte. Ne jamais inventer 20 px, 36 px ou 56 px.</p>
+        <span class="rule-tag">Layout</span>
+      </article>
+
+      <article class="rule">
+        <span class="rule-num">Règle 09</span>
+        <h3 class="rule-title">Geist Mono est réservée.</h3>
+        <p class="rule-body">mono-md uniquement pour les blocs de code, les métadonnées techniques et la numérotation des sections (<code style="font-family:var(--typography-mono-md-fontFamily);background:rgba(10,10,14,0.06);padding:1px 6px;border-radius:4px;">01 ·</code>). Jamais pour le body, les labels de boutons ou les titres.</p>
+        <span class="rule-tag">Type</span>
+      </article>
+
+      <article class="rule">
+        <span class="rule-num">Règle 10</span>
+        <h3 class="rule-title">L'or apparaît, ne décore jamais.</h3>
+        <p class="rule-body">secondary est strictement fonctionnel : fill du CTA secondaire, focus rings, hover de lien, numérotation, tag « Do » de la Rules-band. Jamais en teinte décorative sur cartes, séparateurs, body ou backgrounds.</p>
+        <span class="rule-tag">Identity</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <span class="footer-brand">TravelSkills.io · Design System</span>
+    <span>Alpha · v0.1 · 2026-05</span>
+    <span>Nicolas &amp; Jérémy · Fondateurs, TravelSkills</span>
+  </div>
+  <div class="container" style="margin-top:var(--spacing-lg);font-family:var(--typography-mono-md-fontFamily);font-size:0.6875rem;color:var(--color-on-surface-muted);letter-spacing:0.04em;line-height:1.6;">
+    Typographie : Geist &amp; Geist Mono, Vercel, sous SIL Open Font License 1.1.<br>
+    Iconographie : Heroicons (solid), Tailwind Labs, sous licence MIT.
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var toggle = document.querySelector('.topbar-menu-toggle');
+    var menu = document.getElementById('topbar-menu');
+    if (!toggle || !menu) return;
+
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+      if (open) menu.setAttribute('data-open', '');
+      else menu.removeAttribute('data-open');
+    }
+
+    toggle.addEventListener('click', function () {
+      var open = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+
+    menu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Close menu if viewport grows past mobile breakpoint
+    var mq = window.matchMedia('(min-width: 721px)');
+    var onChange = function (ev) { if (ev.matches) setOpen(false); };
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else if (mq.addListener) mq.addListener(onChange);
+  })();
+</script>
+</body>
+</html>

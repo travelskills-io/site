@@ -1,0 +1,63 @@
+{
+  "theme": {
+    "extend": {
+      "colors": {
+        "primary": "#ffffff",
+        "on-primary": "#0a0a0e",
+        "secondary": "#d0b982",
+        "on-secondary": "#0a0a0e",
+        "neutral": "#27272a",
+        "on-neutral": "#fafafa",
+        "surface": "#0a0a0e",
+        "on-surface": "#ffffff",
+        "on-surface-display": "#f0ede7",
+        "on-surface-muted": "#9ca3af",
+        "surface-container": "#191b24",
+        "surface-container-high": "#22242e",
+        "outline": "#2a2d38",
+        "inverse-surface": "#f0ede7",
+        "on-inverse-surface": "#0a0a0e",
+        "success": "#10b981",
+        "on-success": "#0a0a0e",
+        "info": "#8b5cf6",
+        "on-info": "#0a0a0e",
+        "error": "#ef4444",
+        "on-error": "#0a0a0e"
+      },
+      "fontFamily": {
+        "sans": ["Geist", "system-ui", "sans-serif"],
+        "mono": ["Geist Mono", "ui-monospace", "monospace"]
+      },
+      "fontSize": {
+        "display": ["4rem", { "lineHeight": "4.25rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+        "headline-lg": ["2.5rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+        "headline-md": ["1.5rem", { "lineHeight": "1.875rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+        "title-lg": ["1.25rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+        "body-lg": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+        "body-md": ["0.875rem", { "lineHeight": "1.3125rem", "fontWeight": "400" }],
+        "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }],
+        "mono-md": ["0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" }]
+      },
+      "borderRadius": {
+        "sm": "4px",
+        "md": "8px",
+        "lg": "12px",
+        "xl": "16px",
+        "2xl": "24px",
+        "full": "9999px"
+      },
+      "spacing": {
+        "xs": "4px",
+        "sm": "8px",
+        "md": "12px",
+        "lg": "16px",
+        "xl": "24px",
+        "2xl": "32px",
+        "3xl": "48px",
+        "4xl": "64px",
+        "5xl": "96px",
+        "6xl": "128px"
+      }
+    }
+  }
+}
