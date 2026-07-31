@@ -192,9 +192,6 @@ export default function WaitlistForm({
             {apiError}
           </p>
         )}
-
-        {/* 5. Reassurance */}
-        <p className="text-label-sm text-on-surface-muted">{hero.reassurance}</p>
       </form>
     </div>
   );
