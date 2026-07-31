@@ -1,0 +1,34 @@
+# TravelSkills.io
+
+> The first open-source library of Claude Agent Skills for travel and tourism
+> professionals. Each skill is built from how the work is really done — field
+> interviews, trade sources, and before/after examples — not from generic web
+> data. One skill per profession, each targeting a single job.
+
+## Roles and skills
+
+- **Travel Agent** (`claude-travel-agent-skill`): sales, objection handling, dispute resolution, legal obligations.
+- **Travel Planner** (`travel-planner-skill`): tailor-made trips, high-end client relationships, itinerary storytelling, pricing rationale.
+- **Stay Advisor** (`tourism-stay-advisor`): visitor welcome, local guidance, deep local knowledge, handling lost or unhappy travelers.
+- **Tour Operator** (`tour-operator-skill`): product copy, supplier negotiation, B2B communication, pre-departure documents.
+
+## How the skills are built
+
+The library starts from real practice, not the web: interviews, podcasts, trade
+articles, and what practitioners say about their day-to-day. Each skill turns
+that into before/after examples (one version that sounds generic, one that
+sounds right) so an assistant learns by example rather than from abstract rules.
+Every example is checked against how travelers actually talk in forums, reviews,
+and online communities.
+
+## Status
+
+- First skills: Fall 2026.
+- License: MIT. Open to contributions from industry professionals.
+- Built and maintained by Nicolas François.
+
+## Links
+
+- Home (English): https://travelskills.io/
+- Home (French): https://travelskills.io/fr/
+- GitHub: https://github.com/TravelSkills-io

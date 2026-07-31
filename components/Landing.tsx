@@ -1,6 +1,7 @@
 import type { Locale } from '@/lib/content';
 import { content, HERO_CODE, GITHUB_URL } from '@/lib/content';
 import WaitlistForm from './WaitlistForm';
+import StructuredData from './StructuredData';
 
 function GitHubMark() {
   return (
@@ -16,6 +17,7 @@ export default function Landing({ locale }: { locale: Locale }) {
 
   return (
     <div className="min-h-screen bg-surface">
+      <StructuredData locale={locale} />
       {/* Header: wordmark + language switch. Not gold (gold never decorates). */}
       <header className="container-page flex items-center justify-between py-xl">
         <span className="text-title-lg font-semibold tracking-[-0.005em] text-on-surface-display">
