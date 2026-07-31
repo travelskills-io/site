@@ -146,23 +146,26 @@ export default async function Landing({ locale }: { locale: Locale }) {
   );
 }
 
-// Renders the status line, turning the trailing "GitHub" mention into a link.
+// Renders the status line, turning the whole "... GitHub" segment after the
+// middle-dot separator into a link to the GitHub org.
 function renderStatusLine(line: string) {
-  const marker = 'GitHub';
-  const idx = line.lastIndexOf(marker);
+  const sep = ' · ';
+  const idx = line.indexOf(sep);
   if (idx === -1) return line;
+  const before = line.slice(0, idx);
+  const linkText = line.slice(idx + sep.length);
   return (
     <>
-      {line.slice(0, idx)}
+      {before}
+      {sep}
       <a
         href={GITHUB_URL}
         target="_blank"
         rel="noopener"
-        className="transition-colors duration-[150ms] ease-out hover:text-secondary"
+        className="underline underline-offset-2 transition-colors duration-[150ms] ease-out hover:text-secondary"
       >
-        {marker}
+        {linkText}
       </a>
-      {line.slice(idx + marker.length)}
     </>
   );
 }

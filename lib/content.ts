@@ -216,7 +216,7 @@ export const content: Record<Locale, LocaleContent> = {
       emailPlaceholder: 'votre@email.com',
       emailLabel: 'Adresse e-mail',
       consent: 'J’accepte de recevoir des e-mails de TravelSkills.io.',
-      privacyLinkLabel: 'Politique de confidentialité',
+      privacyLinkLabel: 'Confidentialité',
       privacyHref: '/fr/politique-de-confidentialite/',
       submitting: 'Envoi en cours',
       success: 'C’est noté. Vous recevrez un e-mail à la sortie des premiers skills.',
