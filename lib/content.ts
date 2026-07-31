@@ -76,13 +76,16 @@ export interface LocaleContent {
     consent: string;
     privacyLinkLabel: string;
     privacyHref: string;
-    // form status messages
+    reassurance: string;
+    // form status + validation messages
     submitting: string;
     success: string;
-    alreadyIn: string;
-    error: string;
-    invalidEmail: string;
+    apiError: string;
+    emailEmpty: string;
+    emailInvalid: string;
+    consentRequired: string;
   };
+  anchorCta: { prompt: string; link: string };
   roles: { heading: string; items: Role[] };
   faq: { heading: string; items: Faq[] };
   footer: {
@@ -118,11 +121,17 @@ export const content: Record<Locale, LocaleContent> = {
       consent: 'I agree to receive emails from TravelSkills.io. Unsubscribe at any time.',
       privacyLinkLabel: 'Privacy policy',
       privacyHref: '/privacy/',
-      submitting: 'Joining…',
-      success: "You're in. See you at launch.",
-      alreadyIn: "You're already on the list.",
-      error: 'Something went wrong. Please retry.',
-      invalidEmail: 'Please enter a valid email address.',
+      reassurance: 'One email when the first skills ship. Nothing else.',
+      submitting: 'Sending',
+      success: 'You are on the list. We will email you when the first skills ship.',
+      apiError: 'Something went wrong. Try again in a moment.',
+      emailEmpty: 'Enter your email address.',
+      emailInvalid: 'This email address is not valid.',
+      consentRequired: 'Check this box to join the waitlist.',
+    },
+    anchorCta: {
+      prompt: 'The first skills ship in autumn 2026.',
+      link: 'Join the waitlist',
     },
     roles: {
       heading: 'Four roles, four skills',
@@ -212,11 +221,17 @@ export const content: Record<Locale, LocaleContent> = {
         'J’accepte de recevoir des e-mails de TravelSkills.io. Désinscription à tout moment.',
       privacyLinkLabel: 'Politique de confidentialité',
       privacyHref: '/fr/politique-de-confidentialite/',
-      submitting: 'Inscription…',
-      success: 'C’est noté. Rendez-vous au lancement.',
-      alreadyIn: 'Vous êtes déjà inscrit.',
-      error: 'Une erreur est survenue. Réessayez.',
-      invalidEmail: 'Merci d’entrer une adresse e-mail valide.',
+      reassurance: 'Un e-mail à la sortie des premiers skills. Rien d’autre.',
+      submitting: 'Envoi en cours',
+      success: 'C’est noté. Vous recevrez un e-mail à la sortie des premiers skills.',
+      apiError: 'L’inscription n’a pas abouti. Réessayez dans un instant.',
+      emailEmpty: 'Renseignez votre adresse e-mail.',
+      emailInvalid: 'Cette adresse e-mail n’est pas valide.',
+      consentRequired: 'Cochez cette case pour rejoindre la waitlist.',
+    },
+    anchorCta: {
+      prompt: 'Les premiers skills sortent à l’automne 2026.',
+      link: 'Rejoindre la waitlist',
     },
     roles: {
       heading: 'Quatre métiers, quatre skills',

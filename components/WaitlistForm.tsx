@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { Locale, LocaleContent } from '@/lib/content';
 
-type Status = 'idle' | 'submitting' | 'success' | 'already' | 'error';
+type Status = 'idle' | 'submitting' | 'done';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -33,24 +33,42 @@ export default function WaitlistForm({
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
-  const [message, setMessage] = useState<string>('');
+  const [emailError, setEmailError] = useState('');
+  const [consentError, setConsentError] = useState('');
+  const [apiError, setApiError] = useState('');
 
-  const done = status === 'success' || status === 'already';
+  const emailRef = useRef<HTMLInputElement>(null);
+  const consentRef = useRef<HTMLInputElement>(null);
+
+  const submitting = status === 'submitting';
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (status === 'submitting' || done) return;
+    if (submitting) return;
+    setApiError('');
 
+    // Validate on click, stop at the first error, focus the faulty control.
     const value = email.trim();
-    if (!EMAIL_RE.test(value)) {
-      setStatus('error');
-      setMessage(hero.invalidEmail);
+    if (!value) {
+      setEmailError(hero.emailEmpty);
+      emailRef.current?.focus();
       return;
     }
+    if (!EMAIL_RE.test(value)) {
+      setEmailError(hero.emailInvalid);
+      emailRef.current?.focus();
+      return;
+    }
+    setEmailError('');
+
+    if (!consent) {
+      setConsentError(hero.consentRequired);
+      consentRef.current?.focus();
+      return;
+    }
+    setConsentError('');
 
     setStatus('submitting');
-    setMessage('');
-
     try {
       const res = await fetch('/api/subscribe/', {
         method: 'POST',
@@ -58,99 +76,126 @@ export default function WaitlistForm({
         body: JSON.stringify({ email: value, lang: locale }),
       });
       const data = await res.json().catch(() => ({}));
-
       if (res.ok && data.success) {
-        setStatus(data.alreadySubscribed ? 'already' : 'success');
-        setMessage(data.alreadySubscribed ? hero.alreadyIn : hero.success);
-        setEmail('');
+        setStatus('done');
       } else {
-        setStatus('error');
-        setMessage(hero.error);
+        setStatus('idle');
+        setApiError(hero.apiError);
       }
     } catch {
-      setStatus('error');
-      setMessage(hero.error);
+      setStatus('idle');
+      setApiError(hero.apiError);
     }
   }
 
-  // Success / already-subscribed: replace the form with a clear confirmation.
-  if (done) {
+  const containerClass = 'mt-2xl w-full max-w-[440px] scroll-mt-3xl';
+
+  // Success / already subscribed: replace the form with a confirmation.
+  if (status === 'done') {
     return (
-      <div className="mt-2xl w-full max-w-[440px]">
+      <div id="waitlist" className={containerClass}>
         <div
           role="status"
           aria-live="polite"
           className="flex items-center gap-md rounded-lg bg-surface-container px-lg py-md"
         >
           <CheckCircleIcon />
-          <p className="text-body-md text-on-surface-display">{message}</p>
+          <p className="text-body-md text-on-surface-display">{hero.success}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mt-2xl w-full max-w-[440px]">
-      {/* flex-wrap + order: mobile stacks input -> consent -> button; desktop
-          puts input + button on one row with consent below. DOM order stays
-          input -> consent -> button so tab order is logical. */}
-      <form onSubmit={onSubmit} noValidate className="flex flex-wrap items-center gap-md">
-        <label htmlFor="waitlist-email" className="sr-only">
-          {hero.emailLabel}
-        </label>
-        <input
-          id="waitlist-email"
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          placeholder={hero.emailPlaceholder}
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            if (status === 'error') setStatus('idle');
-          }}
-          className="order-1 w-full rounded-lg border-0 bg-surface-container px-lg py-md text-body-md text-on-surface placeholder:text-on-surface-muted sm:w-auto sm:flex-1"
-        />
+    <div id="waitlist" className={containerClass}>
+      {/* 1. Social proof (live count) */}
+      <p className="text-body-md text-on-surface">
+        <span className="font-semibold">{count.toLocaleString(locale)}</span> {hero.socialProofSuffix}
+      </p>
 
-        {/* Explicit GDPR consent, required at collection (see privacy policy). */}
-        <label className="order-2 flex w-full cursor-pointer items-start gap-sm text-label-sm text-on-surface-muted sm:order-3">
+      <form onSubmit={onSubmit} noValidate className="mt-lg flex flex-col gap-lg">
+        {/* 2. Email */}
+        <div>
+          <label htmlFor="waitlist-email" className="sr-only">
+            {hero.emailLabel}
+          </label>
           <input
-            type="checkbox"
-            checked={consent}
-            onChange={(e) => setConsent(e.target.checked)}
-            className="mt-[2px] h-[14px] w-[14px] shrink-0 accent-[color:var(--color-secondary)]"
+            ref={emailRef}
+            id="waitlist-email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            placeholder={hero.emailPlaceholder}
+            value={email}
+            aria-invalid={emailError ? true : undefined}
+            aria-describedby={emailError ? 'waitlist-email-error' : undefined}
+            onChange={(e) => {
+              const v = e.target.value;
+              setEmail(v);
+              if (emailError && EMAIL_RE.test(v.trim())) setEmailError('');
+            }}
+            className={`w-full rounded-lg border-0 bg-surface-container px-lg py-md text-body-md text-on-surface placeholder:text-on-surface-muted ${
+              emailError ? 'outline outline-2 outline-error' : ''
+            }`}
           />
-          <span>
-            {hero.consent}{' '}
-            <a
-              href={hero.privacyHref}
-              className="underline underline-offset-2 transition-colors duration-[150ms] ease-out hover:text-secondary"
-            >
-              {hero.privacyLinkLabel}
-            </a>
-          </span>
-        </label>
+          {emailError && (
+            <p id="waitlist-email-error" role="alert" className="mt-sm text-label-sm text-error">
+              {emailError}
+            </p>
+          )}
+        </div>
 
+        {/* 3. Consent + privacy policy */}
+        <div>
+          <label className="flex cursor-pointer items-start gap-sm text-label-sm text-on-surface-muted">
+            <input
+              ref={consentRef}
+              type="checkbox"
+              checked={consent}
+              aria-invalid={consentError ? true : undefined}
+              aria-describedby={consentError ? 'waitlist-consent-error' : undefined}
+              onChange={(e) => {
+                setConsent(e.target.checked);
+                if (e.target.checked) setConsentError('');
+              }}
+              className="mt-[2px] h-[14px] w-[14px] shrink-0 accent-[color:var(--color-secondary)]"
+            />
+            <span>
+              {hero.consent}{' '}
+              <a
+                href={hero.privacyHref}
+                className="underline underline-offset-2 transition-colors duration-[150ms] ease-out hover:text-secondary"
+              >
+                {hero.privacyLinkLabel}
+              </a>
+            </span>
+          </label>
+          {consentError && (
+            <p id="waitlist-consent-error" role="alert" className="mt-sm text-label-sm text-error">
+              {consentError}
+            </p>
+          )}
+        </div>
+
+        {/* 4. Submit (only ever disabled while sending) */}
         <button
           type="submit"
-          disabled={!consent || status === 'submitting'}
-          className="order-3 w-full shrink-0 rounded-full bg-primary px-[20px] py-md text-label-sm font-medium text-on-primary transition-opacity duration-[150ms] ease-out hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 sm:order-2 sm:w-auto"
+          disabled={submitting}
+          aria-busy={submitting || undefined}
+          className="w-full rounded-full bg-primary px-[20px] py-md text-label-sm font-medium text-on-primary transition-opacity duration-[150ms] ease-out hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:self-start"
         >
-          {status === 'submitting' ? hero.submitting : hero.cta}
+          {submitting ? hero.submitting : hero.cta}
         </button>
-      </form>
 
-      {/* Social proof by default; red error message on failure. */}
-      <p className="mt-lg text-body-md text-on-surface" aria-live="polite" role="status">
-        {status === 'error' ? (
-          <span className="text-error">{message}</span>
-        ) : (
-          <>
-            <span className="font-semibold">{count.toLocaleString(locale)}</span>{' '}
-            {hero.socialProofSuffix}
-          </>
+        {apiError && (
+          <p role="alert" className="text-label-sm text-error">
+            {apiError}
+          </p>
         )}
-      </p>
+
+        {/* 5. Reassurance */}
+        <p className="text-label-sm text-on-surface-muted">{hero.reassurance}</p>
+      </form>
     </div>
   );
 }

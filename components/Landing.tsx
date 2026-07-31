@@ -3,6 +3,7 @@ import { content, HERO_CODE, GITHUB_URL } from '@/lib/content';
 import { getWaitlistCount } from '@/lib/waitlist';
 import WaitlistForm from './WaitlistForm';
 import StructuredData from './StructuredData';
+import JoinWaitlistLink from './JoinWaitlistLink';
 
 function GitHubMark() {
   return (
@@ -91,6 +92,15 @@ export default async function Landing({ locale }: { locale: Locale }) {
             ))}
           </div>
         </section>
+
+        {/* Conversion reminder: text link back to the hero form (no 2nd form). */}
+        <p className="mt-6xl text-body-lg text-on-surface">
+          {c.anchorCta.prompt}{' '}
+          <JoinWaitlistLink
+            label={c.anchorCta.link}
+            className="text-on-surface-display underline underline-offset-2 transition-colors duration-[150ms] ease-out hover:text-secondary"
+          />
+        </p>
       </main>
 
       {/* ── Footer ─────────────────────────────────────────────────────── */}
