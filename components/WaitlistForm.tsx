@@ -21,22 +21,14 @@ function CheckCircleIcon() {
   );
 }
 
-// Renders the social-proof line with the leading count emphasized.
-function renderSocialProof(line: string) {
-  const [count, ...rest] = line.split(' ');
-  return (
-    <>
-      <span className="font-semibold">{count}</span> {rest.join(' ')}
-    </>
-  );
-}
-
 export default function WaitlistForm({
   locale,
   hero,
+  count,
 }: {
   locale: Locale;
   hero: LocaleContent['hero'];
+  count: number;
 }) {
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
@@ -153,7 +145,10 @@ export default function WaitlistForm({
         {status === 'error' ? (
           <span className="text-error">{message}</span>
         ) : (
-          renderSocialProof(hero.socialProof)
+          <>
+            <span className="font-semibold">{count.toLocaleString(locale)}</span>{' '}
+            {hero.socialProofSuffix}
+          </>
         )}
       </p>
     </div>

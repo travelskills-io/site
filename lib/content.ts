@@ -69,7 +69,7 @@ export interface LocaleContent {
     h1: string;
     subtitle: string;
     cta: string;
-    socialProof: string;
+    socialProofSuffix: string;
     statusLine: string;
     emailPlaceholder: string;
     emailLabel: string;
@@ -111,7 +111,7 @@ export const content: Record<Locale, LocaleContent> = {
       subtitle:
         'The first open-source library of Claude Agent Skills for travel pros. Built from how the work is really done, not from generic web data.',
       cta: 'Join the waitlist',
-      socialProof: `${WAITLIST_COUNT} travel pros have already joined the waitlist`,
+      socialProofSuffix: 'travel pros have already joined the waitlist',
       statusLine: 'First skills: Fall 2026 · Follow the project on GitHub',
       emailPlaceholder: 'your@email.com',
       emailLabel: 'Email address',
@@ -204,7 +204,7 @@ export const content: Record<Locale, LocaleContent> = {
       subtitle:
         'La première bibliothèque open-source de Claude Agent Skills dédiée aux professionnels du tourisme et du voyage. Construite à partir du travail réel des praticiens, pas des données génériques du web.',
       cta: 'Rejoindre la waitlist',
-      socialProof: `${WAITLIST_COUNT} pros du voyage ont déjà rejoint la waitlist`,
+      socialProofSuffix: 'pros du voyage ont déjà rejoint la waitlist',
       statusLine: 'Premiers skills : Automne 2026 · Suivez le projet sur GitHub',
       emailPlaceholder: 'votre@email.com',
       emailLabel: 'Adresse e-mail',

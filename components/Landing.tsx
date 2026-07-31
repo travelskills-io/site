@@ -1,5 +1,6 @@
 import type { Locale } from '@/lib/content';
 import { content, HERO_CODE, GITHUB_URL } from '@/lib/content';
+import { getWaitlistCount } from '@/lib/waitlist';
 import WaitlistForm from './WaitlistForm';
 import StructuredData from './StructuredData';
 
@@ -11,8 +12,9 @@ function GitHubMark() {
   );
 }
 
-export default function Landing({ locale }: { locale: Locale }) {
+export default async function Landing({ locale }: { locale: Locale }) {
   const c = content[locale];
+  const count = await getWaitlistCount();
   const otherHref = locale === 'en' ? '/fr/' : '/';
 
   return (
@@ -44,7 +46,7 @@ export default function Landing({ locale }: { locale: Locale }) {
             <h1 className="type-display max-w-[12ch]">{c.hero.h1}</h1>
             <p className="mt-xl max-w-[60ch] text-body-lg text-on-surface">{c.hero.subtitle}</p>
 
-            <WaitlistForm locale={locale} hero={c.hero} />
+            <WaitlistForm locale={locale} hero={c.hero} count={count} />
 
             <p className="mt-2xl text-label-sm text-on-surface-muted">
               {renderStatusLine(c.hero.statusLine)}

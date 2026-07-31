@@ -4,6 +4,9 @@ import { content } from '@/lib/content';
 
 const c = content.en;
 
+// Refresh the live Brevo waitlist count at most hourly (ISR).
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: c.meta.title,
   description: c.meta.description,
