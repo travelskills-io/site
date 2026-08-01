@@ -20,7 +20,7 @@ export const SKILL_IDS = {
 } as const;
 
 // Decorative hero code block. It is code, so identical in both locales.
-// License MUST match the retained project license.
+// Carries no license line: the project license is not decided yet.
 export const HERO_CODE = `---
 name: ${SKILL_IDS.travelAgent}
 version: 1.0.0

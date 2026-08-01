@@ -23,8 +23,8 @@ and online communities.
 
 ## Status
 
-- First skills: Fall 2026.
-- License: MIT. Open to contributions from industry professionals.
+- First skill: Fall 2026.
+- Open to contributions from industry professionals.
 - Built and maintained by Nicolas François.
 
 ## Links

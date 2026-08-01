@@ -2,8 +2,7 @@
   "name": "travelskills-site",
   "version": "4.0.0",
   "private": true,
-  "description": "TravelSkills.io landing page — open-source Claude Agent Skills for travel and tourism professionals.",
-  "license": "MIT",
+  "description": "TravelSkills.io landing page: open-source Claude Agent Skills for travel and tourism professionals.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

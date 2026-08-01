@@ -39,12 +39,6 @@ export default function Page() {
         ).
       </p>
 
-      <h2>Licence</h2>
-      <p>
-        TravelSkills est un projet open source. La bibliothèque et le code de ce site sont publiés
-        sous <strong>licence MIT</strong>.
-      </p>
-
       <h2>Attributions</h2>
       <ul>
         <li>Polices : Geist et Geist Mono par Vercel, sous licence SIL Open Font License 1.1.</li>
