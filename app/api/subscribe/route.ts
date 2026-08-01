@@ -76,9 +76,8 @@ export async function POST(request: Request) {
     result.code === 400 && result.body?.code === 'duplicate_parameter';
   const isNewContact = result.code === 201;
 
-  console.log('[brevo] contacts response', result.code, JSON.stringify(result.body));
-
   if (![201, 204].includes(result.code) && !alreadySubscribed) {
+    console.error('[brevo] contacts rejected', result.code, JSON.stringify(result.body));
     return NextResponse.json(
       { success: false, message: 'Subscription failed' },
       { status: 500 },
@@ -86,7 +85,6 @@ export async function POST(request: Request) {
   }
 
   // 2. Notify the team only on a genuinely new contact.
-  let notifyCode: number | string = 'skipped';
   if (isNewContact) {
     try {
       const notify = await brevo('/smtp/email', {
@@ -99,18 +97,16 @@ export async function POST(request: Request) {
           SOURCE: 'travelskills.io',
         },
       });
-      notifyCode = notify.code;
-      console.log('[brevo] notification response', notify.code, JSON.stringify(notify.body));
+      // Surfaced in the runtime logs so a silently failing notification (the
+      // subscription itself still succeeds) can be spotted.
+      if (notify.code >= 300) {
+        console.error('[brevo] notification rejected', notify.code, JSON.stringify(notify.body));
+      }
     } catch (err) {
       // Notification failure must not fail the subscription itself.
-      notifyCode = 'threw';
-      console.error('Brevo notification error', err);
+      console.error('[brevo] notification error', err);
     }
   }
 
-  return NextResponse.json({
-    success: true,
-    alreadySubscribed,
-    _diag: { contacts: result.code, listId: LIST_ID, notify: notifyCode },
-  });
+  return NextResponse.json({ success: true, alreadySubscribed });
 }
