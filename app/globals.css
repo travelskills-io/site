@@ -138,6 +138,15 @@
     margin-top: var(--spacing-3xl);
     margin-bottom: var(--spacing-lg);
   }
+  .legal-prose h3 {
+    font-size: var(--typography-title-lg-fontSize);
+    line-height: var(--typography-title-lg-lineHeight);
+    font-weight: var(--typography-title-lg-fontWeight);
+    letter-spacing: var(--typography-title-lg-letterSpacing);
+    color: var(--color-on-surface-display);
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-md);
+  }
   .legal-prose p {
     font-size: 1rem;
     line-height: 1.5rem;
