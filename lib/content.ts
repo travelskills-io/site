@@ -169,7 +169,7 @@ export const content: Record<Locale, LocaleContent> = {
       ],
     },
     faq: {
-      heading: 'Questions we get asked',
+      heading: 'What you should know',
       items: [
         {
           q: "Why isn't a general-purpose AI enough for travel?",
@@ -197,7 +197,7 @@ export const content: Record<Locale, LocaleContent> = {
     footer: {
       baseline: 'Built from real practice. For the people who live it.',
       paragraph:
-        'TravelSkills is an open-source project, open to contributions from professionals in the industry. Every example added to the library comes from a real source. Every skill is public, testable, adjustable, and open to improvement.',
+        'TravelSkills is an open-source project, open to contributions from professionals in the industry. Every pattern will come from a real, identified source.',
       name: 'Nicolas François',
       nameUrl: 'https://nfrancois.fr/en/',
       role: 'Founder, TravelSkills',
@@ -279,7 +279,7 @@ export const content: Record<Locale, LocaleContent> = {
       ],
     },
     faq: {
-      heading: 'Les questions qu’on nous pose',
+      heading: 'Ce qu’il faut savoir',
       items: [
         {
           q: 'Pourquoi un assistant IA classique ne suffit pas pour le voyage ?',
@@ -307,7 +307,7 @@ export const content: Record<Locale, LocaleContent> = {
     footer: {
       baseline: 'Construit depuis le terrain. Pour ceux qui y travaillent.',
       paragraph:
-        'TravelSkills est un projet open source, ouvert aux contributions des professionnels du secteur. Chaque pattern ajouté à la base vient d’une source réelle. Chaque skill est public, testable, ajustable, perfectible.',
+        'TravelSkills est un projet open source, ouvert aux contributions des professionnels du secteur. Chaque pattern viendra d’une source réelle, identifiée et vérifiable.',
       name: 'Nicolas François',
       nameUrl: 'https://nfrancois.fr/',
       role: 'Fondateur, TravelSkills',
