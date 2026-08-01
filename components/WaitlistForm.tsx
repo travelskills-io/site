@@ -147,7 +147,9 @@ export default function WaitlistForm({
 
         {/* 3. Consent + privacy policy */}
         <div>
-          <label className="flex cursor-pointer items-start gap-sm text-label-sm text-on-surface-muted">
+          {/* Wrapping label: the whole line is the tap target, so the effective
+              target is far above the 24x24 minimum (WCAG 2.5.8). */}
+          <label className="flex cursor-pointer items-start gap-md py-xs text-label-sm text-on-surface-muted">
             <input
               ref={consentRef}
               type="checkbox"
@@ -158,7 +160,7 @@ export default function WaitlistForm({
                 setConsent(e.target.checked);
                 if (e.target.checked) setConsentError('');
               }}
-              className="mt-[2px] h-[14px] w-[14px] shrink-0 accent-[color:var(--color-secondary)]"
+              className="consent-checkbox mt-[-1px]"
             />
             <span>
               {hero.consent}{' '}
