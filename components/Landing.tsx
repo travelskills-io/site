@@ -26,14 +26,24 @@ export default async function Landing({ locale }: { locale: Locale }) {
         <span className="text-title-lg font-semibold tracking-[-0.005em] text-on-surface-display">
           Travel<span className="text-on-surface">Skills</span>.io
         </span>
-        <nav aria-label={locale === 'en' ? 'Language' : 'Langue'} className="flex items-center gap-sm text-label-sm">
-          <span aria-current="page" className="text-on-surface">
+        {/* Language switch. Tap targets >= 24x24 (WCAG 2.5.8) via padding, and
+            the affordance points at the target language: current is muted, the
+            clickable other language is the contrasted one. */}
+        <nav
+          aria-label={locale === 'en' ? 'Language' : 'Langue'}
+          className="-mr-md flex items-center text-label-sm"
+        >
+          <span aria-current="true" className="px-md py-sm text-on-surface-muted">
             {locale === 'en' ? 'EN' : 'FR'}
           </span>
-          <span className="text-on-surface-muted">/</span>
+          <span aria-hidden="true" className="text-on-surface-muted">
+            /
+          </span>
           <a
             href={otherHref}
-            className="text-on-surface-muted transition-colors duration-[150ms] ease-out hover:text-secondary"
+            hrefLang={locale === 'en' ? 'fr' : 'en'}
+            lang={locale === 'en' ? 'fr' : 'en'}
+            className="px-md py-sm text-on-surface transition-colors duration-[150ms] ease-out hover:text-secondary"
           >
             {locale === 'en' ? 'FR' : 'EN'}
           </a>
