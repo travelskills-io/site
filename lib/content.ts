@@ -8,7 +8,6 @@ export type Locale = 'en' | 'fr';
 export const GITHUB_URL = 'https://github.com/TravelSkills-io';
 export const CONTACT_EMAIL = 'hello@travelskills.io';
 export const WAITLIST_COUNT = 142; // real Brevo list 5 count (2026-07)
-export const LICENSE = 'MIT';
 
 // The four skill identifiers. STRICTLY identical across FR, EN, GitHub and repos.
 // Rendered in monospace, they read like filenames. Order is deliberate:
@@ -27,7 +26,6 @@ name: ${SKILL_IDS.travelAgent}
 version: 1.0.0
 description: AI skills for travel
   & tourism professionals
-license: ${LICENSE}
 ---
 
 # Skills for travel pros

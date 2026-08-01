@@ -64,8 +64,11 @@ export default async function Landing({ locale }: { locale: Locale }) {
             </p>
           </div>
 
-          {/* Decorative code block. Real text, tight radius, never pill. */}
-          <div className="lg:col-span-5">
+          {/* Decorative code block. Purely visual: hidden below 768px so mobile
+              visitors reach the roles section right after the hero, and hidden
+              from assistive tech. Stays in English on /fr/ (a SKILL.md is
+              written in English). */}
+          <div aria-hidden="true" className="hidden md:block lg:col-span-5">
             <pre className="overflow-x-auto rounded-sm bg-surface-container p-xl font-mono text-mono-md leading-[1.25rem] text-on-surface">
               <code>{HERO_CODE}</code>
             </pre>
