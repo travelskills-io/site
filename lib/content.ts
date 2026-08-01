@@ -74,6 +74,7 @@ export interface LocaleContent {
     consent: string;
     privacyLinkLabel: string;
     privacyHref: string;
+    reassurance: string;
     // form status + validation messages
     submitting: string;
     success: string;
@@ -118,6 +119,7 @@ export const content: Record<Locale, LocaleContent> = {
       consent: 'I agree to receive emails from TravelSkills.io.',
       privacyLinkLabel: 'Privacy policy',
       privacyHref: '/privacy/',
+      reassurance: 'One email when a skill ships. Unsubscribe in one click.',
       submitting: 'Sending',
       success: 'You are on the list. We will email you when the first skills ship.',
       apiError: 'Something went wrong. Try again in a moment.',
@@ -216,6 +218,7 @@ export const content: Record<Locale, LocaleContent> = {
       consent: 'J’accepte de recevoir des e-mails de TravelSkills.io.',
       privacyLinkLabel: 'Confidentialité',
       privacyHref: '/fr/politique-de-confidentialite/',
+      reassurance: 'Un mail à la sortie de chaque skill. Désinscription en un clic.',
       submitting: 'Envoi en cours',
       success: 'C’est noté. Vous recevrez un e-mail à la sortie des premiers skills.',
       apiError: 'L’inscription n’a pas abouti. Réessayez dans un instant.',

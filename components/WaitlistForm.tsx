@@ -194,6 +194,10 @@ export default function WaitlistForm({
             {apiError}
           </p>
         )}
+
+        {/* Frequency and unsubscribe, at the moment of sending. Distinct from
+            the consent notice above, which points at the privacy policy. */}
+        <p className="text-label-sm text-on-surface-muted">{hero.reassurance}</p>
       </form>
     </div>
   );
