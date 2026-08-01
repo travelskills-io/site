@@ -58,6 +58,17 @@ export default function StructuredData({ locale }: { locale: Locale }) {
         about: { '@id': `${ORIGIN}/#organization` },
       },
       {
+        '@type': 'ItemList',
+        name: c.roles.heading,
+        itemListElement: c.roles.items.map((role, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: role.name,
+          description: role.description,
+          identifier: role.id,
+        })),
+      },
+      {
         '@type': 'FAQPage',
         '@id': `${homeUrl}#faq`,
         inLanguage,
