@@ -106,14 +106,12 @@ export default async function Landing({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        {/* Conversion reminder: text link back to the hero form (no 2nd form). */}
-        <p className="mt-6xl text-body-lg text-on-surface">
-          {c.anchorCta.prompt}{' '}
-          <JoinWaitlistLink
-            label={c.anchorCta.link}
-            className="text-on-surface-display underline underline-offset-2 transition-colors duration-[150ms] ease-out hover:text-secondary"
-          />
-        </p>
+        {/* Conversion reminder: sentence as running text, then the same primary
+            button as the hero (no second form, it jumps back to the first). */}
+        <div className="mt-6xl">
+          <p className="max-w-[60ch] text-body-lg text-on-surface">{c.anchorCta.prompt}</p>
+          <JoinWaitlistLink label={c.anchorCta.link} className="btn-primary mt-lg" />
+        </div>
       </main>
 
       {/* ── Footer ─────────────────────────────────────────────────────── */}

@@ -184,7 +184,7 @@ export default function WaitlistForm({
           type="submit"
           disabled={submitting}
           aria-busy={submitting || undefined}
-          className="w-full rounded-full bg-primary px-[20px] py-md text-label-sm font-medium text-on-primary transition-opacity duration-[150ms] ease-out hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:self-start"
+          className="btn-primary w-full sm:w-auto sm:self-start"
         >
           {submitting ? hero.submitting : hero.cta}
         </button>

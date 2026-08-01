@@ -77,6 +77,31 @@
     }
   }
 
+  /* Primary CTA (design system `button-primary`). Shared by the hero submit
+     button and the second CTA at the end of the page so the two cannot drift. */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: var(--rounded-full);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    font-size: var(--typography-label-sm-fontSize);
+    line-height: var(--typography-label-sm-lineHeight);
+    font-weight: var(--typography-label-sm-fontWeight);
+    letter-spacing: var(--typography-label-sm-letterSpacing);
+    text-decoration: none;
+    transition: opacity var(--motion-hover);
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+  .btn-primary:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
   /* Consent checkbox: 20px box with a visible secondary-grey border on the dark
      surface, gold fill when checked. Tokens only, no new color values. The
      check glyph is inlined because a data URI cannot read a CSS variable; its
