@@ -21,6 +21,13 @@ export default async function Landing({ locale }: { locale: Locale }) {
   return (
     <div className="min-h-screen bg-surface">
       <StructuredData locale={locale} />
+      {/* Skip link: hidden until focused, first stop in the tab order. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-lg focus:top-lg focus:z-50 focus:rounded-lg focus:bg-surface-container focus:px-lg focus:py-md focus:text-body-md focus:text-on-surface"
+      >
+        {c.skipToContent}
+      </a>
       {/* Header: wordmark + language switch. Not gold (gold never decorates). */}
       <header className="container-page flex items-center justify-between py-xl">
         <span className="text-title-lg font-semibold tracking-[-0.005em] text-on-surface-display">
@@ -50,7 +57,7 @@ export default async function Landing({ locale }: { locale: Locale }) {
         </nav>
       </header>
 
-      <main className="container-page pb-6xl">
+      <main id="main" className="container-page pb-6xl">
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section className="grid grid-cols-1 gap-4xl pt-4xl lg:grid-cols-12 lg:gap-xl lg:pt-6xl">
           <div className="lg:col-span-7">

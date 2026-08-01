@@ -60,6 +60,7 @@ export interface FooterLink {
 export interface LocaleContent {
   htmlLang: string;
   season: string;
+  skipToContent: string;
   meta: {
     title: string;
     description: string;
@@ -103,6 +104,7 @@ export const content: Record<Locale, LocaleContent> = {
   en: {
     htmlLang: 'en',
     season: 'Fall 2026',
+    skipToContent: 'Skip to main content',
     meta: {
       title: 'TravelSkills, open-source Claude Skills for travel and tourism',
       description:
@@ -212,6 +214,7 @@ export const content: Record<Locale, LocaleContent> = {
   fr: {
     htmlLang: 'fr',
     season: 'Automne 2026',
+    skipToContent: 'Aller au contenu principal',
     meta: {
       title: 'TravelSkills, Claude Skills open-source pour le voyage et le tourisme',
       description:
