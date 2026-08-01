@@ -39,6 +39,13 @@ export default function Page() {
         ).
       </p>
 
+      <h2>Données personnelles</h2>
+      <p>
+        La collecte, le traitement et la conservation des données personnelles, ainsi que vos droits
+        au titre du RGPD, sont détaillés dans la{' '}
+        <a href="/fr/politique-de-confidentialite/">politique de confidentialité</a>.
+      </p>
+
       <h2>Attributions</h2>
       <ul>
         <li>Polices : Geist et Geist Mono par Vercel, sous licence SIL Open Font License 1.1.</li>

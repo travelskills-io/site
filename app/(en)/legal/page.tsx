@@ -39,6 +39,12 @@ export default function Page() {
         ).
       </p>
 
+      <h2>Personal data</h2>
+      <p>
+        How personal data is collected, processed and retained, along with your rights under the
+        GDPR, is set out in the <a href="/privacy/">privacy policy</a>.
+      </p>
+
       <h2>Attributions</h2>
       <ul>
         <li>Typefaces: Geist and Geist Mono by Vercel, under the SIL Open Font License 1.1.</li>
