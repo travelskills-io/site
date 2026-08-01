@@ -45,7 +45,10 @@ export interface Role {
 
 export interface Faq {
   q: string;
-  a: string;
+  /** One entry per paragraph. */
+  a: string[];
+  /** First paragraph rendered bold (used by the opening question only). */
+  leadBold?: boolean;
 }
 
 export interface FooterLink {
@@ -168,15 +171,25 @@ export const content: Record<Locale, LocaleContent> = {
       items: [
         {
           q: "Why isn't a general-purpose AI enough for travel?",
-          a: 'It learned the job from the web at large, so it knows all the words without knowing the voice of the people who do the work. It knows what a tailor-made trip is. It doesn’t know that the same word lands differently with a high-end client than with a supplier. The output looks right: the right terms, the right apparent tone. And it rings false to someone who has done the job for ten years, on a detail they catch in two seconds. That gap is what a skill fixes.',
+          leadBold: true,
+          a: [
+            'It learned the job from the web, so it knows all the words without knowing the voice of the people who do the work.',
+            'It knows what a tailor-made trip is. It doesn’t know that the same word lands differently with a high-end client than with a supplier. The output looks right and it rings false to someone who has done the job for ten years, on a detail they catch in two seconds. That gap is what a skill fixes.',
+          ],
         },
         {
-          q: 'How do you actually build these skills?',
-          a: 'We start from how the work is really done, not from the web: interviews, podcasts, trade articles, what practitioners tell us about their day-to-day. We look for what sets an experienced pro apart from a beginner. The phrasings they use, the ones they have learned to avoid, how they shift their tone depending on who they’re talking to. Then we turn all of it into before/after examples: one version that sounds generic, one that sounds right. That lets an assistant learn by example, rather than from abstract rules. Each skill targets one job, not tourism as a whole.',
+          q: 'Where is the project right now?',
+          a: [
+            'Nothing is published yet. We are collecting the material: interviews with practitioners, plus the podcasts and trade articles we go through alongside. The patterns are being written, one role at a time.',
+            'What is settled: four roles, one skill per role, published on GitHub. The first one ships in Fall 2026. The rest, starting with the release order, is open.',
+          ],
         },
         {
-          q: 'How do you know a skill sounds genuinely right?',
-          a: 'We ask that about every example, because a text can be clean and still sound off. To settle it, we don’t stop at the pro’s point of view. We also look at how travelers actually talk, the raw language you read in forums, reviews, and online communities. The idea is simple: a text meant to earn a client’s trust should produce that reaction when tested from that side. If it doesn’t, the rewrite doesn’t hold, and we go back to it. That’s how we keep ourselves honest.',
+          q: 'What do I get by joining the waitlist?',
+          a: [
+            'An email when a skill ships and close to nothing in between. We may send you one or two messages before Fall 2026, on what is moving and what we are trying to validate. No automated sequence behind it and your address goes nowhere else.',
+            'Unsubscribe in one click.',
+          ],
         },
       ],
     },
@@ -268,15 +281,25 @@ export const content: Record<Locale, LocaleContent> = {
       items: [
         {
           q: 'Pourquoi un assistant IA classique ne suffit pas pour le voyage ?',
-          a: 'Parce qu’il a appris le métier sur le web en général, donc il en connaît tous les mots sans connaître la voix de ceux qui le pratiquent. Il sait ce qu’est un voyage sur mesure, mais il ne sait pas qu’un même mot ne se dit pas pareil selon qu’on s’adresse à un client haut de gamme ou à un fournisseur. Le résultat a l’air juste : les bons termes, le bon ton apparent. Et il sonne faux à quelqu’un qui fait ce métier depuis dix ans, sur un détail qu’il repère en deux secondes. C’est ce décalage qu’un skill vient corriger.',
+          leadBold: true,
+          a: [
+            'Parce qu’il a appris le métier sur le web, donc il en connaît tous les mots sans connaître la voix de ceux qui le pratiquent.',
+            'Il sait ce qu’est un voyage sur mesure. Il ne sait pas qu’un même mot ne se dit pas pareil selon qu’on s’adresse à un client haut de gamme ou à un fournisseur. Le résultat a l’air juste et il sonne faux à quelqu’un qui fait ce métier depuis dix ans, sur un détail qu’il repère en deux secondes. C’est ce décalage qu’un skill vient corriger.',
+          ],
         },
         {
-          q: 'Comment vous construisez ces skills, concrètement ?',
-          a: 'On part de la matière de terrain plutôt que du web : entretiens, podcasts, articles métier, ce que des praticiens nous racontent de leur travail réel. On y repère ce qui sépare un pro expérimenté d’un débutant, les tournures qu’il emploie, celles qu’il a appris à éviter, la façon dont il ajuste son registre. Puis on transforme tout ça en exemples avant/après : une version qui sonne générique, une version qui sonne juste. C’est le format qui permet à un assistant d’apprendre par l’exemple, pas par la règle abstraite. Chaque skill vise un métier précis, pas le tourisme en bloc.',
+          q: 'Où en est le projet, concrètement ?',
+          a: [
+            'Rien n’est publié à ce jour. On collecte la matière : entretiens avec des praticiens, podcasts et articles métier dépouillés en parallèle. Les patterns sont en cours d’écriture, métier par métier.',
+            'Ce qui est acquis : quatre métiers, un skill par métier, publiés sur GitHub. Le premier sort à l’automne 2026. Le reste, à commencer par l’ordre de sortie, n’est pas tranché.',
+          ],
         },
         {
-          q: 'Comment vous savez qu’un skill sonne vraiment juste ?',
-          a: 'C’est la question qu’on se pose à chaque pattern, parce qu’un texte peut être propre et sonner faux quand même. Pour trancher, on ne s’arrête pas au point de vue du pro. On regarde aussi du côté du voyageur, dans le registre brut qu’on lit sur les forums, les avis, les groupes de discussion. L’idée est simple : un texte censé inspirer confiance à un client devrait produire cette réaction quand on le teste de ce côté-là. Si ce n’est pas le cas, le pattern ne tient pas et on le revoit. C’est notre garde-fou.',
+          q: 'Qu’est-ce qu’on reçoit en s’inscrivant à la waitlist ?',
+          a: [
+            'Un mail à la sortie de chaque skill et à peu près rien entre-temps. D’ici l’automne 2026, il est possible qu’on vous envoie un ou deux messages sur ce qui avance et sur ce qu’on cherche à valider. Pas de séquence automatisée derrière et votre adresse ne part nulle part ailleurs.',
+            'Désinscription en un clic.',
+          ],
         },
       ],
     },

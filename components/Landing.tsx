@@ -100,7 +100,16 @@ export default async function Landing({ locale }: { locale: Locale }) {
             {c.faq.items.map((item) => (
               <div key={item.q}>
                 <h3 className="text-headline-md text-on-surface-display">{item.q}</h3>
-                <p className="mt-lg max-w-[70ch] text-body-lg text-on-surface">{item.a}</p>
+                {item.a.map((paragraph, i) => (
+                  <p
+                    key={i}
+                    className={`mt-lg max-w-[70ch] text-body-lg text-on-surface${
+                      item.leadBold && i === 0 ? ' font-semibold' : ''
+                    }`}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             ))}
           </div>

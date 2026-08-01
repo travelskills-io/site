@@ -75,7 +75,7 @@ export default function StructuredData({ locale }: { locale: Locale }) {
         mainEntity: c.faq.items.map((item) => ({
           '@type': 'Question',
           name: item.q,
-          acceptedAnswer: { '@type': 'Answer', text: item.a },
+          acceptedAnswer: { '@type': 'Answer', text: item.a.join(' ') },
         })),
       },
     ],
