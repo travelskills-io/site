@@ -113,7 +113,7 @@ export const content: Record<Locale, LocaleContent> = {
         'The first open-source library of Claude Agent Skills for travel pros. Built from how the work is really done, not from generic web data.',
       cta: 'Join the waitlist',
       socialProofSuffix: 'travel pros have already joined the waitlist',
-      statusLine: 'First skills: Fall 2026 · Follow the project on GitHub',
+      statusLine: 'First skill: Fall 2026 · Follow the project on GitHub',
       emailPlaceholder: 'your@email.com',
       emailLabel: 'Email address',
       consent: 'I agree to receive emails from TravelSkills.io.',
@@ -128,7 +128,7 @@ export const content: Record<Locale, LocaleContent> = {
       consentRequired: 'Check this box to join the waitlist.',
     },
     anchorCta: {
-      prompt: 'The first skills ship in autumn 2026.',
+      prompt: 'The first skill ships in Fall 2026.',
       link: 'Join the waitlist',
     },
     roles: {
@@ -212,7 +212,7 @@ export const content: Record<Locale, LocaleContent> = {
         'La première bibliothèque open-source de Claude Agent Skills dédiée aux professionnels du tourisme et du voyage. Construite à partir du travail réel des praticiens, pas des données génériques du web.',
       cta: 'Rejoindre la waitlist',
       socialProofSuffix: 'pros du voyage ont déjà rejoint la waitlist',
-      statusLine: 'Premiers skills : Automne 2026 · Suivez le projet sur GitHub',
+      statusLine: 'Premier skill : automne 2026 · Suivez le projet sur GitHub',
       emailPlaceholder: 'votre@email.com',
       emailLabel: 'Adresse e-mail',
       consent: 'J’accepte de recevoir des e-mails de TravelSkills.io.',
@@ -227,7 +227,7 @@ export const content: Record<Locale, LocaleContent> = {
       consentRequired: 'Cochez cette case pour rejoindre la waitlist.',
     },
     anchorCta: {
-      prompt: 'Les premiers skills sortent à l’automne 2026.',
+      prompt: 'Le premier skill sort à l’automne 2026.',
       link: 'Rejoindre la waitlist',
     },
     roles: {
