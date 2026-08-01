@@ -117,7 +117,7 @@ export const content: Record<Locale, LocaleContent> = {
       subtitle:
         'The first open-source library of Claude Agent Skills for travel pros. Built from how the work is really done, not from generic web data.',
       cta: 'Join the waitlist',
-      socialProofSuffix: 'travel pros have already joined the waitlist',
+      socialProofSuffix: 'people on the waitlist',
       statusLine: 'First skill: Fall 2026 · Follow the project on GitHub',
       emailPlaceholder: 'your@email.com',
       emailLabel: 'Email address',
@@ -189,8 +189,7 @@ export const content: Record<Locale, LocaleContent> = {
         {
           q: 'What do I get by joining the waitlist?',
           a: [
-            'An email when a skill ships and close to nothing in between. We may send you one or two messages before Fall 2026, on what is moving and what we are trying to validate. No automated sequence behind it and your address goes nowhere else.',
-            'Unsubscribe in one click.',
+            'An email when a skill ships and close to nothing in between. We may send you one or two messages before Fall 2026, on what is moving and what we are trying to validate. No automated sequence behind it and your address goes nowhere else. Unsubscribe in one click.',
           ],
         },
       ],
@@ -225,9 +224,9 @@ export const content: Record<Locale, LocaleContent> = {
     hero: {
       h1: 'Des skills IA pensés pour les pros du voyage.',
       subtitle:
-        'La première bibliothèque open-source de Claude Agent Skills dédiée aux professionnels du tourisme et du voyage. Construite à partir du travail réel des praticiens, pas des données génériques du web.',
+        'La première bibliothèque open-source de Claude Agent Skills dédiée aux professionnels du tourisme et du voyage. Construite à partir de la façon dont le métier se fait vraiment, pas des données génériques du web.',
       cta: 'Rejoindre la waitlist',
-      socialProofSuffix: 'pros du voyage ont déjà rejoint la waitlist',
+      socialProofSuffix: 'inscrits sur la waitlist',
       statusLine: 'Premier skill : automne 2026 · Suivez le projet sur GitHub',
       emailPlaceholder: 'votre@email.com',
       emailLabel: 'Adresse e-mail',
@@ -293,15 +292,14 @@ export const content: Record<Locale, LocaleContent> = {
         {
           q: 'Où en est le projet, concrètement ?',
           a: [
-            'Rien n’est publié à ce jour. On collecte la matière : entretiens avec des praticiens, podcasts et articles métier dépouillés en parallèle. Les patterns sont en cours d’écriture, métier par métier.',
+            'Rien n’est publié à ce jour. On collecte la matière : entretiens avec des pros du voyage, podcasts et articles métier dépouillés en parallèle. Les patterns sont en cours d’écriture, métier par métier.',
             'Ce qui est acquis : quatre métiers, un skill par métier, publiés sur GitHub. Le premier sort à l’automne 2026. Le reste, à commencer par l’ordre de sortie, n’est pas tranché.',
           ],
         },
         {
           q: 'Qu’est-ce qu’on reçoit en s’inscrivant à la waitlist ?',
           a: [
-            'Un mail à la sortie de chaque skill et à peu près rien entre-temps. D’ici l’automne 2026, il est possible qu’on vous envoie un ou deux messages sur ce qui avance et sur ce qu’on cherche à valider. Pas de séquence automatisée derrière et votre adresse ne part nulle part ailleurs.',
-            'Désinscription en un clic.',
+            'Un mail à la sortie de chaque skill et à peu près rien entre-temps. D’ici l’automne 2026, il est possible qu’on vous envoie un ou deux messages sur ce qui avance et sur ce qu’on cherche à valider. Pas de séquence automatisée derrière et votre adresse ne part nulle part ailleurs. Désinscription en un clic.',
           ],
         },
       ],
