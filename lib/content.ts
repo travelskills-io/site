@@ -200,7 +200,7 @@ export const content: Record<Locale, LocaleContent> = {
         'TravelSkills is an open-source project, open to contributions from professionals in the industry. Every pattern will come from a real, identified source.',
       name: 'Nicolas François',
       nameUrl: 'https://nfrancois.fr/en/',
-      role: 'Founder, TravelSkills',
+      role: 'Creator, TravelSkills',
       links: [
         { label: 'GitHub', href: GITHUB_URL, external: true },
         { label: 'Legal notice', href: '/legal/' },
@@ -310,7 +310,7 @@ export const content: Record<Locale, LocaleContent> = {
         'TravelSkills est un projet open source, ouvert aux contributions des professionnels du secteur. Chaque pattern viendra d’une source réelle, identifiée et vérifiable.',
       name: 'Nicolas François',
       nameUrl: 'https://nfrancois.fr/',
-      role: 'Fondateur, TravelSkills',
+      role: 'Créateur, TravelSkills',
       links: [
         { label: 'GitHub', href: GITHUB_URL, external: true },
         { label: 'Mentions légales', href: '/fr/mentions-legales/' },
